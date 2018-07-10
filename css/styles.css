@@ -118,7 +118,8 @@ nav h1 a {
 /* ====================== Map ====================== */
 #map {
   height: 400px;
-  width: 100%;
+	min-width: 100%;
+  max-width: 100%;
   background-color: #ccc;
 }
 /* ====================== Restaurant Filtering ====================== */
