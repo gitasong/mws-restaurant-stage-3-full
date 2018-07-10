@@ -213,6 +213,9 @@ nav h1 a {
 
 /* ====================== Restaurant Details ====================== */
 #restaurant-container, #reviews-container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
 }
 #restaurant-name {
   color: #f18200;
