@@ -54,6 +54,10 @@ main {
   min-height: 100%;
 }
 footer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
   background-color: #444;
   color: #aaa;
   font-size: 8pt;
