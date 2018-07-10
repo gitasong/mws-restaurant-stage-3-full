@@ -44,6 +44,9 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 	display: block;
 }
 #maincontent {
+main, header, footer {
+	width: 100%;
+}
   background-color: #f3f3f3;
   min-height: 100%;
 }
