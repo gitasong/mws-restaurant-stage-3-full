@@ -341,6 +341,9 @@ nav h1 a {
 	#restaurants-list li a {
 	  font-size: 1.1rem;  /* 13pt */
 	}
+	#restaurant-cuisine, #restaurant-address {
+		font-size: 1.3rem;
+	}
 }
 
 @media screen and (min-width: 600px) and (max-width:899px) {
