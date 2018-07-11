@@ -342,3 +342,55 @@ nav h1 a {
 	  font-size: 1.1rem;  /* 13pt */
 	}
 }
+
+@media screen and (min-width: 600px) and (max-width:899px) {
+	#restaurants-list {
+		align-content: flex-start;
+	}
+	#restaurants-list li:nth-child(odd) {
+		width: 37.5%;
+		margin-right: 5%;
+	}
+	#restaurants-list li:nth-child(even) {
+		width: 37.5%;
+		margin-right: 0;
+	}
+}
+
+@media screen and (min-width: 900px) and (max-width: 1199px) {
+	#restaurants-list {
+		justify-content: flex-start;
+		align-content: flex-start;
+	}
+	#restaurants-list li:nth-of-type(3n+1) {
+		width: calc(70% / 3);
+		margin-left: 10%;
+		margin-right: 5%;
+	}
+	#restaurants-list li:nth-of-type(3n+2) {
+		width: calc(70% / 3);
+		margin-right: 5%;
+	}
+	#restaurants-list li:nth-of-type(3n) {
+		width: calc(70% / 3);
+		margin-right: 10%;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	#restaurants-list {
+		justify-content: flex-start;
+		align-content: flex-start;
+		max-width: 1500px;
+	}
+	#restaurants-list li:nth-of-type(4n+1) {
+		width: calc(75% / 4);
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	#restaurants-list li:nth-of-type(4n+2), #restaurants-list li:nth-of-type(4n+3),
+	#restaurants-list li:nth-of-type(4n) {
+		width: calc(75% / 4);
+		margin-right: 5%;
+	}
+}
