@@ -317,3 +317,28 @@ nav h1 a {
 #restaurant-hours td {
   color: #666;
 }
+
+/* ====================== Restaurant Details ====================== */
+@media screen and (min-width: 400px) {
+	body, td, th, p, ul, li {
+		font-size: 1.2rem;  /* 14pt */
+	}
+	footer {
+		font-size: .89rem;  /* 10 pt */
+	}
+	nav h1 a {
+		font-size: 1.75rem;  /* 20pt */
+	}
+	.filter-options select {
+		font-size: .92rem;  /* 11pt */
+	}
+	#restaurants-list li h1 {
+		font-size: 1.58rem;  /* 18pt */
+	}
+	#restaurants-list p {
+		font-size: 1.2rem;  /* 14pt */
+	}
+	#restaurants-list li a {
+	  font-size: 1.1rem;  /* 13pt */
+	}
+}
