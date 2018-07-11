@@ -257,12 +257,11 @@ nav h1 a {
   padding-bottom: 1pt;
 }
 #reviews-list {
-  margin: 0;
-  padding: 0;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: center;
+	padding-left: 0;
 }
 #reviews-list li {
 	background-color: #fff;
