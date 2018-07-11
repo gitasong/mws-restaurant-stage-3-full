@@ -375,6 +375,11 @@ nav h1 a {
 		width: calc(70% / 3);
 		margin-right: 10%;
 	}
+	#restaurant-container, #reviews-container {
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 @media screen and (min-width: 1200px) {
@@ -392,5 +397,10 @@ nav h1 a {
 	#restaurants-list li:nth-of-type(4n) {
 		width: calc(75% / 4);
 		margin-right: 5%;
+	}
+	#restaurant-container, #reviews-container {
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
