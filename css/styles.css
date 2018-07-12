@@ -418,7 +418,7 @@ nav h1 a {
 	#restaurants-list {
 		justify-content: flex-start;
 		align-content: flex-start;
-		max-width: 1500px;
+		/* max-width: 2000px; */
 	}
 	#restaurants-list li:nth-of-type(4n+1) {
 		width: calc(75% / 4);
