@@ -66,6 +66,19 @@ footer {
   padding: 2rem;
   text-transform: uppercase;
 }
+/* ====================== Skip Links ====================== */
+.skip-link {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	background: #333;
+	color: #e32d00;
+	padding: 8px;
+	z-index: 100;
+}
+.skip-link:focus {
+	top: 0;
+}
 /* ====================== Navigation ====================== */
 nav {
   width: 100%;
