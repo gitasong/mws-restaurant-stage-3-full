@@ -29,11 +29,11 @@ ul, li {
 	color: #333;
 }
 a {
-	color: orange;
+	color: #e32d00;
 	text-decoration: none;
 }
 a:hover, a:focus {
-	color: #3397db;
+	color: #cc2900;
 	text-decoration: none;
 }
 a img{
@@ -59,8 +59,8 @@ footer {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-  background-color: #444;
-  color: #aaa;
+  background-color: #050505;
+  color: #ccc;
   font-size: .75rem;
   letter-spacing: 1px;
   padding: 2rem;
@@ -83,7 +83,7 @@ footer {
 nav {
   width: 100%;
 	padding: 2rem;
-  background-color: #252831;
+  background-color: #050505;
   text-align:center;
 }
 nav h1 {
@@ -141,6 +141,15 @@ nav h1 a {
   margin: 5px 1px 3px 0px;
   border: 1px solid rgba(81, 203, 238, 1);
 }
+.leaflet-container a {
+    color: rgb(204, 41, 0) !important;
+}
+.leaflet-container a:hover {
+    color: rgb(227, 45, 0) !important;
+}
+.leaflet-container a {
+    -webkit-tap-highlight-color: rgba(227, 45, 0, 0.4) !important;
+}
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
 	display: flex;
@@ -149,7 +158,7 @@ nav h1 a {
   width: 100%;
 	margin-bottom: 2rem;
 	padding: .85rem;
-  background-color: #252831;
+  background-color: #050505;
   align-items: center;
 }
 .filter-options #dropdown-container {
@@ -172,9 +181,9 @@ nav h1 a {
   font-size: .8rem;  /* 10pt */
   height: 2rem;
   letter-spacing: 0;
-  margin: .65rem;
-  padding: 0 .75rem;
-  width: 40%;
+  margin: .5rem;
+  padding: 0 .5rem;
+  width: 100%;
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -206,14 +215,15 @@ nav h1 a {
   display: block;
   margin: 0;
   max-width: 100%;
-  min-height: 15rem;
+  /* min-height: 15rem; */
+	height: auto;
   min-width: 100%;
 }
 #restaurants-list .restaurant-info {
 	padding: 0 1.8rem 1.6rem;
 }
 #restaurants-list li h1 {
-  color: #f18200;
+  color: #e32d00;
   font-family: Arial,sans-serif;
   font-size: 1.2rem;  /* 14pt */
   font-weight: 200;
@@ -227,7 +237,7 @@ nav h1 a {
   font-size: 1rem;  /* 11pt */
 }
 #restaurants-list li a {
-  background-color: orange;
+  background-color: #e32d00;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;
@@ -253,7 +263,7 @@ nav h1 a {
 	padding-bottom: 2rem;
 }
 #restaurant-name {
-  color: #f18200;
+  color: #cc2900;
   font-family: Arial,sans-serif;
   font-size: 1.75rem;  /* 20pt */
   font-weight: 200;
@@ -330,7 +340,7 @@ nav h1 a {
 }
 .review-rating {
 	display: inline-block;
-	background-color: orange;
+	background-color: #e32d00;
 	color: #fff;
 	margin: 1rem 0 0 2rem;
 	padding: .5rem .5rem .5rem .5rem;
