@@ -143,13 +143,13 @@ footer {
 
 /* Add a color to all links inside the list */
 #breadcrumb li a {
-    color: #0275d8;
+    color: #e32d00;  /* #0275d8 */
     text-decoration: none;
 }
 
 /* Add a color on mouse-over */
 #breadcrumb li a:hover {
-    color: #01447e;
+    color: #cc2900;  /* #01447e */
     text-decoration: underline;
 }
 
