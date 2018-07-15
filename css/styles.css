@@ -179,10 +179,6 @@ footer {
     color: rgb(227, 45, 0) !important;
 }
 
-.leaflet-container a {
-    -webkit-tap-highlight-color: rgba(227, 45, 0, 0.4) !important;
-}
-
 
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
