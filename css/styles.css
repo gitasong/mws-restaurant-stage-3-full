@@ -419,7 +419,7 @@ footer {
 		font-size: 0.89rem;  /* 10 pt */
 	}
 
-	nav h1 a {
+	.title-container h1 a {
 		font-size: 1.75rem;  /* 20pt */
 	}
 
