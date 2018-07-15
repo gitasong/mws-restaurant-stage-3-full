@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 1.2rem;
 }
 
-article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, .title-container, nav, section {
 	display: block;
 }
 
@@ -95,19 +95,19 @@ footer {
 }
 
 
-/* ====================== Navigation ====================== */
-nav {
+/* ====================== Header / Title Container ====================== */
+.title-container {
   width: 100%;
 	padding: 2rem;
   background-color: #050505;
   text-align:center;
 }
 
-nav h1 {
+.title-container h1 {
   margin: auto;
 }
 
-nav h1 a {
+.title-container h1 a {
   color: #fff;
   font-size: 1.2rem;  /* 14pt */
   font-weight: 200;
