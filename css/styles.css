@@ -169,11 +169,13 @@ footer {
   border: 1px solid rgba(81, 203, 238, 1);
 }
 
-.leaflet-container a {
+.leaflet-control-attribution a {
     color: rgb(204, 41, 0) !important;
+    -webkit-tap-highlight-color: rgba(227, 45, 0, 0.4) !important;
 }
 
-.leaflet-container a:hover {
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
     color: rgb(227, 45, 0) !important;
 }
 
