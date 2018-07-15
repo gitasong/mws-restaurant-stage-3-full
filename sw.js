@@ -1,5 +1,6 @@
 const staticCacheName = 'restaurants-v1';
 
+// Open cache; cache site assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('restaurants-v1').then((cache) => {
@@ -36,6 +37,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Activate service worker, clear old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -47,6 +49,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Fetch assets from cache if offline, from network otherwise
 self.addEventListener('fetch', (event) => {
   console.log(event)
   event.respondWith(
