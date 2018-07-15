@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <!-- Beginning header -->
     <header>
       <!-- Beginning title container -->
       <div class="title-container">
@@ -31,15 +32,19 @@
       </div>
       <!-- End title container -->
     </header>
-
+    <!-- Ending header -->
+    <!-- Beginning main -->
     <main>
+      <!-- Beginning map -->
       <section id="map-container">
         <div id="map"></div>
       </section>
-
+      <!-- Ending map -->
       <section>
+        <!-- Beginning filter options -->
         <div class="filter-options">
           <h2>Filter Results</h2>
+          <!-- Beginning dropdown menus -->
           <div id="dropdown-container">
             <select id="neighborhoods-select" name="neighborhoods" aria-labelledby="neighborhoods-select" onchange="updateRestaurants()">
               <option value="all">All Neighborhoods</option>
@@ -48,8 +53,12 @@
               <option value="all">All Cuisines</option>
             </select>
           </div>
+          <!-- Ending dropdown menus -->
         </div>
+        <!-- Ending filter options -->
+        <!-- Beginning restaurants list -->
         <ul id="restaurants-list"></ul>
+        <!-- Ending restaurants list -->
       </section>
     </main>
 
