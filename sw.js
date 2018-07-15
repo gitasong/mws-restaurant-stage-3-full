@@ -1,3 +1,5 @@
+// Much of this code is courtesy of my and Dylan Scheffer's notes from the Udacity service worker course
+
 const staticCacheName = 'restaurants-v1';
 
 // Open cache; cache site assets
