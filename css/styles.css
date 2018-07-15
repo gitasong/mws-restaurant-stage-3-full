@@ -298,6 +298,7 @@ nav h1 a {
   font-size: 2rem;  /* 24pt */
   font-weight: 300;
   letter-spacing: -1px;
+  margin: 0;
 }
 #reviews-list {
 	display: flex;
@@ -327,7 +328,7 @@ nav h1 a {
 	justify-content: space-between;
 	align-items: baseline;
 	background-color: #444;
-	padding: 1rem 2rem;
+	padding: 1.4rem 2rem .6rem 2rem;
 }
 .review-name {
 	color: #fff;
