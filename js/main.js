@@ -1,7 +1,7 @@
 let restaurants,
   neighborhoods,
   cuisines
-var newMap
+var newMap   // I'm leaving this variable declared with var, per the original code, because the map and markers actually don't load with let (try it!)
 let markers = []
 
 /**
