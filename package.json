@@ -1,0 +1,20 @@
+{
+  "name": "mws-restaurant-app-full",
+  "version": "1.0.0",
+  "description": "Restaurant Reviews app for Udacity Mobile Web Nanodegree, Stage 2",
+  "main": "/js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitasong/mws-restaurant-stage-2-full.git"
+  },
+  "keywords": ["IDB", "IDBPromised", "progressive web app", "progressive web apps", "caching", "responsive design", "accessibility", "web accessibility"],
+  "author": "Nicole Freed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gitasong/mws-restaurant-stage-2-full/issues"
+  },
+  "homepage": "https://github.com/gitasong/mws-restaurant-stage-2-full#readme"
+}
