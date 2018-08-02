@@ -10,11 +10,24 @@
     "type": "git",
     "url": "git+https://github.com/gitasong/mws-restaurant-stage-2-full.git"
   },
-  "keywords": ["IDB", "IDBPromised", "progressive web app", "progressive web apps", "caching", "responsive design", "accessibility", "web accessibility"],
+  "keywords": [
+    "IDB",
+    "IDBPromised",
+    "progressive web app",
+    "progressive web apps",
+    "caching",
+    "responsive design",
+    "accessibility",
+    "web accessibility"
+  ],
   "author": "Nicole Freed",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gitasong/mws-restaurant-stage-2-full/issues"
   },
-  "homepage": "https://github.com/gitasong/mws-restaurant-stage-2-full#readme"
+  "homepage": "https://github.com/gitasong/mws-restaurant-stage-2-full#readme",
+  "devDependencies": {
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0"
+  }
 }
