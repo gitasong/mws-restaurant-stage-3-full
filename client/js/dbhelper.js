@@ -31,6 +31,19 @@ class DBHelper {
     xhr.send();
   }
 
+  // static fetchRestaurants(callback) {
+  //   fetch(DBHelper.DATABASE_URL)
+  //   .then(response => {
+  //     const json = response.json;
+  //     const restaurants = json.restaurants;
+  //     return callback(null, restaurants);
+  //   })
+  //   .catch((error) => {
+  //     const errorMessage = `Request failed. Returned status of ${error}.`;
+  //     callback(errorMessage, null);
+  //   });
+  // }
+
   /**
    * Fetch a restaurant by its ID.
    */
