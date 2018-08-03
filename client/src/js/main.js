@@ -1,3 +1,7 @@
+require('./swRegistration.js');
+require('./dbhelper.js');
+require('./restaurant_info.js');
+
 let restaurants,
   neighborhoods,
   cuisines
