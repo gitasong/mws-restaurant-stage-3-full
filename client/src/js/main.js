@@ -1,6 +1,7 @@
 require('./swRegistration.js');
 require('./dbhelper.js');
 require('./restaurant_info.js');
+import '../css/styles.css';
 
 let restaurants,
   neighborhoods,
