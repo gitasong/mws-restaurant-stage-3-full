@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, './client/dist')
   },
   plugins: [
-    new UglifyJsPlugin();
+    new UglifyJsPlugin(),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
