@@ -5,6 +5,7 @@
   "main": "/client/dist/js/bundle.js",
   "scripts": {
     "build": "webpack",
+    "start": "webpack-dev-server --entry ./client/src/js/main.js --output-filename ./dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
