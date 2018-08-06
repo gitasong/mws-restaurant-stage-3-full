@@ -7,21 +7,21 @@ module.exports = {
   entry: './client/src/js/main.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './client/dist')
+    path: path.resolve(__dirname, './client/public')
   },
   plugins: [
     new UglifyJsPlugin(),
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/index.html',  // origin file
-      filename: 'index.html',  // destination file in dist
+      filename: 'index.html',  // destination file in public
       inject: 'body'
     }),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/restaurant.html',  // origin file
-      filename: 'restaurant.html',  // destination file in dist
+      filename: 'restaurant.html',  // destination file in public
       inject: 'body'
     })
   ],
