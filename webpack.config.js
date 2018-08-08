@@ -18,6 +18,11 @@ module.exports = {
         toType: 'file'
       },
       {
+        from: 'src/data/',
+        to: 'data/',
+        toType: 'dir'
+      },
+      {
         from: 'src/img/',
         to: 'img/',
         toType: 'dir'
