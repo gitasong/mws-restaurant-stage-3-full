@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -10,6 +11,18 @@ module.exports = {
     path: path.resolve(__dirname, './client/public')
   },
   plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: 'src/sw.js',
+        to: 'sw.js',
+        toType: 'file'
+      },
+      {
+        from: 'src/img/',
+        to: 'img/',
+        toType: 'dir'
+      }
+    ], {context: './client/'}),
     new UglifyJsPlugin(),
     new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
