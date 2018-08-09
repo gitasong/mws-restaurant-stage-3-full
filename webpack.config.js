@@ -37,12 +37,14 @@ module.exports = {
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/index.html',  // origin file
       filename: 'index.html',  // destination file in public
+      chunks: ['main'],
       inject: 'body'
     }),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/restaurant.html',  // origin file
       filename: 'restaurant.html',  // destination file in public
+      chunks: ['restaurant_info'],
       inject: 'body'
     })
   ],
