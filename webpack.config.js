@@ -30,6 +30,11 @@ module.exports = {
         from: 'src/img/',
         to: 'img/',
         toType: 'dir'
+      },
+      {
+        from: 'src/css/',
+        to: 'css/',
+        toType: 'dir'
       }
     ], {context: './client/'}),
     new CleanWebpackPlugin(['public']),
@@ -50,13 +55,13 @@ module.exports = {
   ],
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader'
+      //   ]
+      // },
       {
         test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/, query: {presets: ['es2015']}
       }
