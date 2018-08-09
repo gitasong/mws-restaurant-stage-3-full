@@ -2,7 +2,6 @@
 
 require('./swRegistration.js');
 import DBHelper from './dbhelper.js';
-require('./restaurant_info.js');
 import '../css/styles.css';
 
 let restaurants,

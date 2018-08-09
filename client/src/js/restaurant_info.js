@@ -1,5 +1,8 @@
 'use strict';
 
+require('./swRegistration.js');
+import DBHelper from './dbhelper.js';
+
 let restaurant;
 var newMap;  // I'm leaving this variable declared with var, per the original code, because the map actually doesn't load with let (try it!)
 
