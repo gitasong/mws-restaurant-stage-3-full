@@ -12,6 +12,8 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, './client/public/')
   },
+  devtool: 'source-maps',
+  mode: 'development',
   plugins: [
     new CopyWebpackPlugin([
       {
