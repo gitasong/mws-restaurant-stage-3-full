@@ -2,7 +2,6 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './client/src/js/main.js',
@@ -28,7 +27,6 @@ module.exports = {
         toType: 'dir'
       }
     ], {context: './client/'}),
-    new UglifyJsPlugin(),
     new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
