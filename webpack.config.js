@@ -4,10 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './client/src/js/main.js',
+  entry: {
+    main: './client/src/js/main.js',
+    restaurant_info: './client/src/js/restaurant_info.js',
+  },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './client/public')
+    filename: '[name].js',
+    path: path.resolve(__dirname, './client/public/')
   },
   plugins: [
     new CopyWebpackPlugin([
