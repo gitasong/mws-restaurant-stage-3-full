@@ -37,7 +37,6 @@ module.exports = {
         toType: 'dir'
       }
     ], {context: './client/'}),
-    new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/index.html',  // origin file
@@ -51,7 +50,8 @@ module.exports = {
       filename: '../restaurant.html',  // destination file in public
       chunks: ['restaurant_info'],
       inject: 'body'
-    })
+    }),
+    new CleanWebpackPlugin(['./client/public/*/'])
   ],
   module: {
     rules: [
