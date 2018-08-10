@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, './client/public/')
+    path: path.resolve(__dirname, './client/public/js')
   },
   devtool: 'source-maps',
   mode: 'development',
@@ -18,22 +18,22 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: 'src/sw.js',
-        to: 'sw.js',
+        to: '../sw.js',
         toType: 'file'
       },
       {
         from: 'src/data/',
-        to: 'data/',
+        to: '../data/',
         toType: 'dir'
       },
       {
         from: 'src/img/',
-        to: 'img/',
+        to: '../img/',
         toType: 'dir'
       },
       {
         from: 'src/css/',
-        to: 'css/',
+        to: '../css/',
         toType: 'dir'
       }
     ], {context: './client/'}),
@@ -41,14 +41,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/index.html',  // origin file
-      filename: 'index.html',  // destination file in public
+      filename: '../index.html',  // destination file in public
       chunks: ['main'],
       inject: 'body'
     }),
     new HtmlWebpackPlugin({
       title: 'Restaurant Reviews, Stage 2',
       template: './client/src/restaurant.html',  // origin file
-      filename: 'restaurant.html',  // destination file in public
+      filename: '../restaurant.html',  // destination file in public
       chunks: ['restaurant_info'],
       inject: 'body'
     })
