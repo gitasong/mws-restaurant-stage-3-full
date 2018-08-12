@@ -36,7 +36,7 @@ export default class DBHelper {
   static fetchRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL)
     .then(response => {
-      if (response.ok) return response.json;
+      if (response.ok) return response.json();
       throw new Error(`Request failed. Returned status of ${error}.`);
     }).then((data) => {
       const restaurants = data;
