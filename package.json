@@ -2,7 +2,7 @@
   "name": "mws-restaurant-app-full",
   "version": "1.0.0",
   "description": "Restaurant Reviews app for Udacity Mobile Web Nanodegree, Stage 2",
-  "main": "/client/dist/js/bundle.js",
+  "main": "./client/public/js/main.js",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --entry ./client/src/js/main.js --output-filename ./dist/bundle.js",
