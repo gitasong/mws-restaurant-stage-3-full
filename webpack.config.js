@@ -14,6 +14,9 @@ module.exports = {
   },
   devtool: 'source-maps',
   mode: 'development',
+  devServer: {
+    port: 8080
+  },
   plugins: [
     new CopyWebpackPlugin([
       {
