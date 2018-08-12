@@ -13,7 +13,7 @@ let markers = [];
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
-  initMap(); // added
+  self.initMap(); // added
   fetchNeighborhoods();
   fetchCuisines();
 });
@@ -76,8 +76,8 @@ const fillCuisinesHTML = (cuisines = self.cuisines) => {
 /**
  * Initialize leaflet map, called from HTML.
  */
-const initMap = () => {
-  const newMap = L.map('map', {
+self.initMap = () => {  // initMap() and its methods and properties need to be called on self/window because webpack wraps everything in its own IIFE
+  self.newMap = L.map('map', {
         center: [40.722216, -73.987501],
         zoom: 12,
         scrollWheelZoom: false
@@ -89,7 +89,7 @@ const initMap = () => {
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
       'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     id: 'mapbox.streets'
-  }).addTo(newMap);
+  }).addTo(self.newMap);
 
   updateRestaurants();
 }
@@ -109,7 +109,9 @@ const initMap = () => {
 /**
  * Update page and map for current restaurants.
  */
-const updateRestaurants = () => {
+
+// updateRestaurants needs to be in global scope, as well
+self.updateRestaurants = () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
 

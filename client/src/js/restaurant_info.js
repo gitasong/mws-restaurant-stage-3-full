@@ -10,18 +10,18 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
  * Initialize map as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
-  initMap();
+  self.initMap();
 });
 
 /**
  * Initialize leaflet map
  */
-const initMap = () => {
+self.initMap = () => {  // initMap() and its methods and properties need to be called on self/window because webpack wraps everything in its own IIFE
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
     } else {
-      const newMap = L.map('map', {
+      self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
         scrollWheelZoom: false
