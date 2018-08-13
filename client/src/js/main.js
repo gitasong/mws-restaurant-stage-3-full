@@ -91,7 +91,7 @@ self.initMap = () => {  // initMap() and its methods and properties need to be c
     id: 'mapbox.streets'
   }).addTo(self.newMap);
 
-  updateRestaurants();
+  self.updateRestaurants();
 }
 /* window.initMap = () => {
   let loc = {
