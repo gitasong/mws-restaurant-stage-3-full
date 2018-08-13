@@ -1,5 +1,9 @@
 // Much of this code is courtesy of my and Dylan Scheffer's notes from the Udacity service worker course
 
+// import DBHelper from 'js/dbhelper.js';
+// self.importScripts('js/dbhelper.js');
+self.importScripts('idb');  // not clear how to import a node module into sw
+
 const staticCacheName = 'restaurants-v1';
 
 // Open cache; cache site assets
