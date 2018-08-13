@@ -11,6 +11,7 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap();
+  DBHelper.openDatabase();
 });
 
 /**

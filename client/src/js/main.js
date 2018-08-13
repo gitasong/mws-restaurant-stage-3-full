@@ -14,6 +14,7 @@ let markers = [];
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap(); // added
+  DBHelper.openDatabase();
   fetchNeighborhoods();
   fetchCuisines();
 });
