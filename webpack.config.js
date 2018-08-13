@@ -25,6 +25,11 @@ module.exports = {
         toType: 'file'
       },
       {
+        from: 'src/js/dbhelper.js',
+        to: 'js/dbhelper.js',
+        toType: 'file'
+      },
+      {
         from: 'src/data/',
         to: 'data/',
         toType: 'dir'
