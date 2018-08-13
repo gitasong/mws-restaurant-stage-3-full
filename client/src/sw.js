@@ -1,25 +1,6 @@
 // Much of this code is courtesy of my and Dylan Scheffer's notes from the Udacity service worker course
 
-// import DBHelper from 'js/dbhelper.js';
-// self.importScripts('js/dbhelper.js');
-self.importScripts('idb');  // not clear how to import a node module into sw
-
 const staticCacheName = 'restaurants-v1';
-
-const openDatabase = () => {
-  if (!navigator.serviceWorker) return Promise.resolve();
-
-  const dbPromise = idb.open('restaurants', 1, function(upgradeDB) {
-    switch(upgradeDB.oldVersion) {
-      case 0:
-      // placeholder
-      case 1:
-      console.log('Creating restaurants store');
-      upgradeDB.createObjectStore('restaurants', {keyPath: 'id'});
-    }
-  });
-  return dbPromise;
-}
 
 // Open cache; cache site assets
 self.addEventListener('install', (event) => {
@@ -65,8 +46,7 @@ self.addEventListener('activate', (event) => {
         cacheNames.filter((cacheName) => cacheName.startsWith('restaurants-') && cacheName != staticCacheName)
         .map((cacheName) => caches.delete(cacheName))
       );
-    }).then(self.openDatabase())
-    .catch((err) => console.log(`Failed to create database with error ${err}`))
+    })
   );
 });
 

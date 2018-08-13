@@ -15,21 +15,24 @@ export default class DBHelper {
     return `http://localhost:${port}/restaurants`;
   }
 
-  // static openDatabase() {
-  //   if (!navigator.serviceWorker) return Promise.resolve();
-  //
-  //   const dbPromise = idb.open('restaurants', 1, function(upgradeDB) {
-  //     switch(upgradeDB.oldVersion) {
-  //       case 0:
-  //         // placeholder
-  //       case 1:
-  //         console.log('Creating restaurants store');
-  //         upgradeDB.createObjectStore('restaurants', {keyPath: 'id'});
-  //     }
-  //   });
-  //   return dbPromise;
-  //
-  // }
+  /**
+   * Opens and creates database
+  */
+  static openDatabase() {
+    if (!navigator.serviceWorker) return Promise.resolve();
+
+    const dbPromise = idb.open('restaurants', 1, function(upgradeDB) {
+      switch(upgradeDB.oldVersion) {
+        case 0:
+          // placeholder
+        case 1:
+          console.log('Creating restaurants store');
+          upgradeDB.createObjectStore('restaurants', {keyPath: 'id'});
+      }
+    });
+    return dbPromise;
+
+  }
 
   /**
    * Fetch all restaurants.
