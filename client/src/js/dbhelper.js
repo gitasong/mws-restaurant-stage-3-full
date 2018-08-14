@@ -67,6 +67,33 @@ export default class DBHelper {
     });
   }
 
+  static populateDatabase() {
+    // fetch all restaurants with proper error handling.
+    DBHelper.fetchRestaurants((error, restaurants) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        const dbPromise = DBHelper.openDatabase();
+        dbPromise.then(function(db) {
+          const tx = db.transaction('restaurants', 'readwrite');
+          const restaurantStore = tx.objectStore('restaurants');
+
+          return Promise.all(
+            restaurants.map(function(restaurant) {
+              console.log('Adding restaurant: ', restaurant);
+              return restaurantStore.put(restaurant);
+            })
+          ).catch(function(error) {
+            tx.abort();
+            console.log(error);
+          }).then(function() {
+            console.log('All items added successfully!');  // TODO:  Fix location of success message, because it will fire even on transaction abort
+          });
+        });
+      }
+    });
+  }
+
   /**
    * Fetch a restaurant by its ID.
    */
