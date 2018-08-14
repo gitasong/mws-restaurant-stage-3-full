@@ -15,9 +15,17 @@ let markers = [];
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap(); // added
   DBHelper.openDatabase();
+  populateDatabase();
   fetchNeighborhoods();
   fetchCuisines();
 });
+
+/**
+ * Fetch restaurants from server and populate datebase
+ */
+const populateDatabase = () => {
+  DBHelper.populateDatabase();
+}
 
 /**
  * Fetch all neighborhoods and set their HTML.
