@@ -85,6 +85,18 @@ export default class DBHelper {
     });
   }
 
+  static getRestaurants() {
+    // get all restaurants from database
+    const dbPromise = DBHelper.openDatabase();
+
+    return dbPromise.then(function(db) {
+      var tx = db.transaction('restaurants', 'readonly');
+      var restaurantStore = tx.objectStore('restaurants');
+      return restaurantStore.getAll();
+    }).then((restaurants) => console.log('Fetching restaurants from database', restaurants)
+    ).catch((error) => console.error('Error fetching restaurants from database', error));
+  }
+
   /**
    * Fetch a restaurant by its ID.
    */
