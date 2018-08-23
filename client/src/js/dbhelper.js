@@ -19,9 +19,7 @@ export default class DBHelper {
    * Opens and creates database
   */
   static openDatabase() {
-    if (!navigator.serviceWorker) return Promise.resolve();
-
-    const dbPromise = idb.open('restaurants', 1, function(upgradeDB) {
+    return idb.open('restaurants', 1, function(upgradeDB) {
       switch(upgradeDB.oldVersion) {
         case 0:
           // placeholder
@@ -30,8 +28,6 @@ export default class DBHelper {
           upgradeDB.createObjectStore('restaurants', {keyPath: 'id'});
       }
     });
-    return dbPromise;
-
   }
 
   /**
