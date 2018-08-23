@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap(); // added
   // Fetch restaurants from server and populate database
   DBHelper.populateDatabase();
+  DBHelper.getRestaurants();
   fetchNeighborhoods();
   fetchCuisines();
 });
