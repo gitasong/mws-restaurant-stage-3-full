@@ -73,6 +73,7 @@ export default class DBHelper {
       throw new Error(`Request failed. Returned status of ${error}.`);
     }).then((data) => {
       const restaurants = data;  // in JSON format?
+      console.log('Restaurants from server: ', restaurants);
       callback(null, restaurants);
     })
     .catch((error) => {
@@ -93,7 +94,9 @@ export default class DBHelper {
           console.log('Adding restaurant: ', restaurant);
           return restaurantStore.put(restaurant);
         })
-      ).catch(function(error) {
+      ).then(function(result) {
+        console.log('Result from populateDatabase: ', result);
+      }).catch(function(error) {
         tx.abort();
         console.log(error);
       }).then(function() {
