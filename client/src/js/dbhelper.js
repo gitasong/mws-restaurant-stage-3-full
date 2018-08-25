@@ -72,11 +72,11 @@ export default class DBHelper {
       if (response.ok) return response.json();
       throw new Error(`Request failed. Returned status of ${error}.`);
     }).then((data) => {
-      const restaurants = data;
+      const restaurants = data;  // in JSON format?
       callback(null, restaurants);
     })
     .catch((error) => {
-      callback(error, null);
+      callback(error, null);  // FIXME: getting "Uncaught (in promise) TypeError: callback is not a function"
     });
   }
 
@@ -109,7 +109,7 @@ export default class DBHelper {
     return dbPromise.then(function(db) {
       var tx = db.transaction('restaurants', 'readonly');
       var restaurantStore = tx.objectStore('restaurants');
-      return restaurantStore.getAll();
+      return restaurantStore.getAll();  // returns an array
     }).then((restaurants) => console.log('Fetching restaurants from database', restaurants)
     ).catch((error) => console.error('Error fetching restaurants from database', error));
   }
