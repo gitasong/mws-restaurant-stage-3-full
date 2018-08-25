@@ -15,8 +15,9 @@ let markers = [];
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap(); // added
   // Fetch restaurants from server and populate database
-  DBHelper.populateDatabase();
-  DBHelper.getRestaurants();
+  // DBHelper.populateDatabase();
+  DBHelper.routeRestaurants();
+  // DBHelper.getRestaurants();
   fetchNeighborhoods();
   fetchCuisines();
 });
