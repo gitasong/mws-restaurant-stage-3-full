@@ -52,16 +52,16 @@ export default class DBHelper {
   /**
    * Fetch restaurants from database if present; from server otherwise
    */
-  static routeRestaurants() {
-    DBHelper.populateDatabase();  // FIXME: doesn't resturn anything (including a database), so getRestaruants() is going to be undefined?
+  static routeRestaurants(callback) {
     DBHelper.getRestaurants()
     .then((restaurants) => {
-      if (restaurants) {
-        console.log('Displaying restaurants from database');
-        return restaurants;  // in array format
+      if (restaurants.length) {
+        console.log('Displaying restaurants from database', restaurants);
+        if (callback) callback(null, restaurants);
+        return restaurants;
       } else {
         console.log('Displaying restaurants from server');
-        DBHelper.serveRestaurants();  // in JSON format
+        DBHelper.populateDatabase(callback);
       }
     });
   }
@@ -69,52 +69,63 @@ export default class DBHelper {
   static serveRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL)
     .then(response => {
-      if (response.ok) return response.json();
-      throw new Error(`Request failed. Returned status of ${error}.`);
-    }).then((data) => {
-      const restaurants = data;  // in JSON format?
-      console.log('Restaurants from server: ', restaurants);
-      callback(null, restaurants);
+      if (!response.ok) throw new Error(`Request failed. Returned status of ${error}.`);
+      return response.json()
+      .then(data => {
+        console.log('Data from serveRestaurants(): ', data);
+        const restaurants = data;
+        console.log('Restaurants from server: ', restaurants);
+        callback(null, restaurants);
+      }).catch((error) => {
+        callback(error, null);
+      });
     })
-    .catch((error) => {
-      callback(error, null);  // FIXME: getting "Uncaught (in promise) TypeError: callback is not a function"
-    });
   }
 
-  static populateDatabase() {
-    // fetch all restaurants with proper error handling.
+  /**
+   * Populate database with data from server
+   */
+  static populateDatabase(callback) {
+    console.log('Opening database within populateDatabase()');
     const dbPromise = DBHelper.openDatabase();
-    // const restaurants = DBHelper.serveRestaurants();
-    dbPromise.then(function(db) {
-      const tx = db.transaction('restaurants', 'readwrite');
-      const restaurantStore = tx.objectStore('restaurants');
 
-      return Promise.all(
-        restaurants.map(function(restaurant) {
-          console.log('Adding restaurant: ', restaurant);
-          return restaurantStore.put(restaurant);
+    dbPromise.then(function(db) {
+      DBHelper.serveRestaurants((error, restaurants) => {
+        const tx = db.transaction('restaurants', 'readwrite');
+        const restaurantStore = tx.objectStore('restaurants');
+
+        return Promise.all(
+          restaurants.map(function(restaurant) {
+            console.log('Adding restaurant: ', restaurant);
+            return restaurantStore.put(restaurant);
+          }
+        )).then(function(result) {
+          console.log('Result from populateDatabase: ', result);
+          callback(null, restaurants);
         })
-      ).then(function(result) {
-        console.log('Result from populateDatabase: ', result);
-      }).catch(function(error) {
-        tx.abort();
-        console.log(error);
-      }).then(function() {
-        console.log('All items added successfully!');  // TODO:  Fix location of success message, because it will fire even on transaction abort
-      });
+        .catch(function(error) {
+          tx.abort();
+          console.log(error);
+        })
+        .then(function() {
+          console.log('All items added successfully!'); // TODO:  Fix location of success message, because it will fire even on transaction abort
+        });
+      })
     });
   }
 
   static getRestaurants() {
-    // get all restaurants from database
     const dbPromise = DBHelper.openDatabase();
 
     return dbPromise.then(function(db) {
       var tx = db.transaction('restaurants', 'readonly');
       var restaurantStore = tx.objectStore('restaurants');
-      return restaurantStore.getAll();  // returns an array
-    }).then((restaurants) => console.log('Fetching restaurants from database', restaurants)
-    ).catch((error) => console.error('Error fetching restaurants from database', error));
+      return restaurantStore.getAll()
+      .then(restaurants => {
+        console.log('Got restaurants from database: ', restaurants);
+        return restaurants;
+      });
+    }).catch((error) => console.error('Error fetching restaurants from database', error));
   }
 
   /**
