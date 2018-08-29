@@ -66,6 +66,9 @@ export default class DBHelper {
     });
   }
 
+  /**
+   * Fetch restaurants from server
+   */
   static serveRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL)
     .then(response => {
@@ -114,6 +117,9 @@ export default class DBHelper {
     });
   }
 
+  /**
+   * Get restaurants from database
+   */
   static getRestaurants() {
     const dbPromise = DBHelper.openDatabase();
 
