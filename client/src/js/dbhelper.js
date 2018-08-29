@@ -122,7 +122,7 @@ export default class DBHelper {
    */
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
-    DBHelper.serveRestaurants((error, restaurants) => {
+    DBHelper.routeRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
@@ -141,7 +141,7 @@ export default class DBHelper {
    */
   static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
-    DBHelper.serveRestaurants((error, restaurants) => {
+    DBHelper.routeRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
@@ -157,7 +157,7 @@ export default class DBHelper {
    */
   static fetchRestaurantByNeighborhood(neighborhood, callback) {
     // Fetch all restaurants
-    DBHelper.serveRestaurants((error, restaurants) => {
+    DBHelper.routeRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
@@ -173,7 +173,7 @@ export default class DBHelper {
    */
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
-    DBHelper.serveRestaurants((error, restaurants) => {
+    DBHelper.routeRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
@@ -194,7 +194,7 @@ export default class DBHelper {
    */
   static fetchNeighborhoods(callback) {
     // Fetch all restaurants
-    DBHelper.serveRestaurants((error, restaurants) => {
+    DBHelper.routeRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
@@ -212,7 +212,7 @@ export default class DBHelper {
    */
   static fetchCuisines(callback) {
     // Fetch all restaurants
-    DBHelper.serveRestaurants((error, restaurants) => {
+    DBHelper.routeRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
