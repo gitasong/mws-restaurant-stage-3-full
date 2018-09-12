@@ -4,6 +4,9 @@ const staticCacheName = 'restaurants-v1';
 const externalAssetsCache = 'restaurants-externals-v1';
 const allCaches = [staticCacheName, externalAssetsCache];
 
+const mapboxURL = 'https://api.tiles.mapbox.com';
+const leafletURL = 'https://unpkg.com';
+
 // Open cache; cache site assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
