@@ -65,10 +65,30 @@ self.addEventListener('activate', (event) => {
 // });
 
 self.addEventListener('fetch', (event) => {
-  console.log(event)
-  event.respondWith(
-    caches.match(event.request, {ignoreSearch: true}).then((response) => response || fetch(event.request))
-  );
+  var requestURL = new URL(event.request.url);
+  var storageURL = requestURL.pathname;
+  console.log('Internal asset storageURL: ', storageURL);
+
+  if (requestURL.origin !== location.origin) {
+    // if (requestURL.pathname === '/') {
+    //   event.respondWith(caches.match('/skeleton'));
+    //   return;
+    // }
+    if (requestURL.startsWith(mapboxURL) || requestURL.startsWith(leafletURL)) {
+      event.respondWith(getExternalAsset(event.request));
+      return;
+    }
+    // // TODO: respond to avatar urls by responding with
+    // // the return value of serveAvatar(event.request)
+    // if (requestURL.pathname.startsWith('/avatars/')) {
+    //   event.respondWith(serveAvatar(event.request));
+    // }
+  } else {
+    console.log(event);
+    event.respondWith(
+      caches.match(storageURL, {ignoreSearch: true}).then((response) => response || fetch(event.request))
+    );
+  }
 });
 
 function getExternalAsset(request) {
