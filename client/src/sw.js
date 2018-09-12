@@ -57,6 +57,13 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch assets from cache if offline, from network otherwise
+// self.addEventListener('fetch', (event) => {
+//   console.log(event)
+//   event.respondWith(
+//     caches.match(event.request, {ignoreSearch: true}).then((response) => response || fetch(event.request))
+//   );
+// });
+
 self.addEventListener('fetch', (event) => {
   console.log(event)
   event.respondWith(
