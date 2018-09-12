@@ -63,3 +63,26 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request, {ignoreSearch: true}).then((response) => response || fetch(event.request))
   );
 });
+
+function getExternalAsset(request) {
+  // var storageURL = request.url.replace(/-\d+px\.jpg$/, '');
+  var requestURL = new URL(request.url);
+  var storageURL = requestURL.pathname;
+  console.log('External asset storageURL: ', storageURL);
+
+  if (request.url.origin === mapboxURL || request.url.origin === leafletURL) {
+    return caches.open(externalAssetsCache)
+    .then((cache) => {
+      return cache.match(storageURL, {ignoreSearch: true})
+      .then((response) => {
+        if (response) return response;
+
+        return fetch(request).then((networkResponse) => {
+          cache.put(storageURL, networkResponse.clone());
+          return networkResponse;
+        });
+      });
+    });
+  }
+  return;
+}
