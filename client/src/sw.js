@@ -1,6 +1,8 @@
 // Much of this code is courtesy of my and Dylan Scheffer's notes from the Udacity service worker course
 
 const staticCacheName = 'restaurants-v1';
+const externalAssetsCache = 'restaurants-externals-v1';
+const allCaches = [staticCacheName, externalAssetsCache];
 
 // Open cache; cache site assets
 self.addEventListener('install', (event) => {
