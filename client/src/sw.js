@@ -95,11 +95,15 @@ function getExternalAsset(request) {
   var storageURL = requestURL.pathname.slice(1);
   console.log('External asset storageURL: ', storageURL);
 
-    return caches.open(externalAssetsCache)
-    .then((cache) => {
-      return cache.match(storageURL, {ignoreSearch: true})
-      .then((response) => {
-        if (response) return response;
+  return caches.open(externalAssetsCache)
+  .then((cache) => {
+    return cache.match(storageURL, {ignoreSearch: true})
+    .then((response) => {
+      console.log(`Evaluating the response: undefined=${typeof response === 'undefined'}`, response);
+      if (typeof response !== 'undefined') {
+        console.log("Returning response for ", storageURL);
+        return response;
+      }
 
         return fetch(request).then((networkResponse) => {
           cache.put(storageURL, networkResponse.clone());
