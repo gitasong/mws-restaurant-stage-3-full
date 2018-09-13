@@ -5,7 +5,6 @@ const externalAssetsCache = 'restaurants-externals-v1';
 const allCaches = [staticCacheName, externalAssetsCache];
 
 const mapboxURL = 'https://api.tiles.mapbox.com';
-const leafletURL = 'https://unpkg.com';
 
 // Open cache; cache site assets
 self.addEventListener('install', (event) => {
@@ -70,7 +69,7 @@ self.addEventListener('fetch', (event) => {
     //   event.respondWith(caches.match('/skeleton'));
     //   return;
     // }
-    if (requestURL.startsWith(mapboxURL) || requestURL.startsWith(leafletURL)) {
+    if (requestURL.href.startsWith(mapboxURL)) {
       event.respondWith(getExternalAsset(event.request));
       return;
     }
