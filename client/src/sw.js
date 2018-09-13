@@ -71,7 +71,8 @@ self.addEventListener('fetch', (event) => {
     // }
     if (requestURL.href.startsWith(mapboxURL)) {
       event.respondWith(getExternalAsset(event.request));
-      return;
+    } else {
+      event.respondWith(fetch(event.request));
     }
     // // TODO: respond to avatar urls by responding with
     // // the return value of serveAvatar(event.request)
