@@ -61,7 +61,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   var requestURL = new URL(event.request.url);
-  var storageURL = requestURL.pathname;
+  var storageURL = requestURL.pathname.slice(1);
   console.log('Internal asset storageURL: ', storageURL);
 
   if (requestURL.origin !== location.origin) {
@@ -89,7 +89,7 @@ self.addEventListener('fetch', (event) => {
 function getExternalAsset(request) {
   // var storageURL = request.url.replace(/-\d+px\.jpg$/, '');
   var requestURL = new URL(request.url);
-  var storageURL = requestURL.pathname;
+  var storageURL = requestURL.pathname.slice(1);
   console.log('External asset storageURL: ', storageURL);
 
   if (request.url.origin === mapboxURL || request.url.origin === leafletURL) {
