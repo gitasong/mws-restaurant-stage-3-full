@@ -15,9 +15,7 @@ let markers = [];
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap(); // added
   // Fetch restaurants from server and populate database
-  // DBHelper.populateDatabase();
   DBHelper.routeRestaurants();
-  // DBHelper.getRestaurants();
   fetchNeighborhoods();
   fetchCuisines();
 });
@@ -97,24 +95,10 @@ self.initMap = () => {  // initMap() and its methods and properties need to be c
 
   self.updateRestaurants();
 }
-/* window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
-  updateRestaurants();
-} */
 
 /**
  * Update page and map for current restaurants.
  */
-
-// updateRestaurants needs to be in global scope, as well
 self.updateRestaurants = () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
@@ -220,13 +204,3 @@ const addMarkersToMap = (restaurants = self.restaurants) => {
   });
 
 }
-/* const addMarkersToMap = (restaurants = self.restaurants) => {
-  restaurants.forEach(restaurant => {
-    // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
-    });
-    self.markers.push(marker);
-  });
-} */
