@@ -17,7 +17,6 @@ self.addEventListener('install', (event) => {
         'restaurant.html',
         'js/main.js',
         'js/restaurant_info.js',
-        // 'data/restaurants.json',  // No longer needed because it's being bundled
         'js/leaflet.js',
         'css/styles.css',
         'css/leaflet.css',
@@ -52,33 +51,18 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch assets from cache if offline, from network otherwise
-// self.addEventListener('fetch', (event) => {
-//   console.log(event)
-//   event.respondWith(
-//     caches.match(event.request, {ignoreSearch: true}).then((response) => response || fetch(event.request))
-//   );
-// });
-
+// Route requests by origin
 self.addEventListener('fetch', (event) => {
   var requestURL = new URL(event.request.url);
   var storageURL = requestURL.pathname.slice(1);
   console.log('Internal asset storageURL: ', storageURL);
 
   if (requestURL.origin !== location.origin) {
-    // if (requestURL.pathname === '/') {
-    //   event.respondWith(caches.match('/skeleton'));
-    //   return;
-    // }
     if (requestURL.href.startsWith(mapboxURL)) {
       event.respondWith(getExternalAsset(event.request));
     } else {
       event.respondWith(fetch(event.request));
     }
-    // // TODO: respond to avatar urls by responding with
-    // // the return value of serveAvatar(event.request)
-    // if (requestURL.pathname.startsWith('/avatars/')) {
-    //   event.respondWith(serveAvatar(event.request));
-    // }
   } else {
     console.log(event);
     event.respondWith(
@@ -88,7 +72,6 @@ self.addEventListener('fetch', (event) => {
 });
 
 function getExternalAsset(request) {
-  // var storageURL = request.url.replace(/-\d+px\.jpg$/, '');
   request.mode = 'no-cors';
 
   var requestURL = new URL(request.url);
@@ -105,12 +88,11 @@ function getExternalAsset(request) {
         return response;
       }
 
-        return fetch(request).then((networkResponse) => {
-          cache.put(storageURL, networkResponse.clone());
-          return networkResponse;
-        });
+      return fetch(request).then((networkResponse) => {
+        cache.put(storageURL, networkResponse.clone());
+        console.log(`Putting ${storageURL} in cache`);
+        return networkResponse;
       });
     });
-  }
-  return;
+  });
 }
