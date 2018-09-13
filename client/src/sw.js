@@ -92,7 +92,6 @@ function getExternalAsset(request) {
   var storageURL = requestURL.pathname.slice(1);
   console.log('External asset storageURL: ', storageURL);
 
-  if (request.url.origin === mapboxURL || request.url.origin === leafletURL) {
     return caches.open(externalAssetsCache)
     .then((cache) => {
       return cache.match(storageURL, {ignoreSearch: true})
