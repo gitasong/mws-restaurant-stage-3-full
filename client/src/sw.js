@@ -89,6 +89,8 @@ self.addEventListener('fetch', (event) => {
 
 function getExternalAsset(request) {
   // var storageURL = request.url.replace(/-\d+px\.jpg$/, '');
+  request.mode = 'no-cors';
+
   var requestURL = new URL(request.url);
   var storageURL = requestURL.pathname.slice(1);
   console.log('External asset storageURL: ', storageURL);
