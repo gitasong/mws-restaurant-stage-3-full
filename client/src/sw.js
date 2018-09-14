@@ -54,8 +54,6 @@ self.addEventListener('activate', (event) => {
 // Route requests by origin
 self.addEventListener('fetch', (event) => {
   var requestURL = new URL(event.request.url);
-  var storageURL = requestURL.pathname.slice(1);
-  console.log('Internal asset storageURL: ', storageURL);
 
   if (requestURL.origin !== location.origin) {
     if (requestURL.href.startsWith(mapboxURL)) {
@@ -66,31 +64,25 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log(event);
     event.respondWith(
-      caches.match(storageURL, {ignoreSearch: true}).then((response) => response || fetch(event.request))
+      caches.match(event.request, {ignoreSearch: true}).then((response) => response || fetch(event.request))
     );
   }
 });
 
 function getExternalAsset(request) {
-  request.mode = 'no-cors';
-
-  var requestURL = new URL(request.url);
-  var storageURL = requestURL.pathname.slice(1);
-  console.log('External asset storageURL: ', storageURL);
-
   return caches.open(externalAssetsCache)
   .then((cache) => {
-    return cache.match(storageURL, {ignoreSearch: true})
+    return cache.match(request)
     .then((response) => {
       console.log(`Evaluating the response: undefined=${typeof response === 'undefined'}`, response);
       if (typeof response !== 'undefined') {
-        console.log("Returning response for ", storageURL);
+        console.log("Returning response for ", request.href);
         return response;
       }
 
       return fetch(request).then((networkResponse) => {
-        cache.put(storageURL, networkResponse.clone());
-        console.log(`Putting ${storageURL} in cache`);
+        cache.put(request, networkResponse.clone());
+        console.log(`Putting ${request} in cache`);
         return networkResponse;
       });
     });
