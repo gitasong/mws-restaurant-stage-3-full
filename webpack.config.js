@@ -64,7 +64,7 @@ module.exports = {
       inject: 'body'
     }),
     new CompressionPlugin({
-      include: '.client/src/*/'
+      include: './client/src/*/'
     }),
     new CleanWebpackPlugin(['./client/public/*/'])
   ],
