@@ -53,7 +53,7 @@ self.addEventListener('activate', (event) => {
 // Fetch assets from cache if offline, from network otherwise
 // Route requests by origin
 self.addEventListener('fetch', (event) => {
-  var requestURL = new URL(event.request.url);
+  const requestURL = new URL(event.request.url);
 
   if (requestURL.origin !== location.origin) {
     if (requestURL.href.startsWith(mapboxURL)) {
