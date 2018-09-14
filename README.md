@@ -10,11 +10,14 @@ The directory structure of this project is somewhat different from the norm. The
 
 ## Project Overview: Stage 2
 
-For the **Restaurant Reviews** projects, we are incrementally converting a static webpage to a mobile-ready, offline-first web application. In **Stage Two**, you will take our responsive, accessible design from **Stage One** and make it offline-first, so that all assets from all visited pages are available to the client when offline. We do that by implementing in-browser caching and storing assets in indexedDB for offline use.
-
 ### Description
 
 A responsive, accessible, offline-first web application that allows the user to get a list of NYC restaurants corresponding to the neighborhoods and cuisines selected from two dropdown menus.
+
+### Project Overview
+
+For the **Restaurant Reviews** projects, we are incrementally converting a static webpage to a mobile-ready, offline-first web application. In **Stage Two**, you will take our responsive, accessible design from **Stage One** and make it offline-first, so that all assets from all visited pages are available to the client when offline. We do that by implementing in-browser caching and storing assets in indexedDB for offline use.
+
 
 ## Setup/Installation Requirements
 
