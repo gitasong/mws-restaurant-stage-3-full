@@ -71,7 +71,21 @@ const fetchRestaurantFromURL = (callback) => {
  */
 const fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
-  name.innerHTML = restaurant.name;
+  name.innerHTML = restaurant.name + '  ';
+
+  const iconSwap = document.createElement('span');
+  iconSwap.className = 'icon-swap';
+  name.append(iconSwap);
+
+  const favorite = document.createElement('i');
+  favorite.className = 'far fa-heart';
+  favorite.setAttribute('aria-label', `Favorite Me!`);
+  iconSwap.append(favorite);
+
+  const favorited = document.createElement('i');
+  favorited.className = 'fas fa-heart';
+  favorited.setAttribute('aria-label', 'Favorited!');
+  iconSwap.append(favorited);
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
