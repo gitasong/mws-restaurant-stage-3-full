@@ -169,6 +169,24 @@ const createRestaurantHTML = (restaurant) => {
   name.innerHTML = restaurant.name;
   infoContainer.append(name);
 
+  const iconContainer = document.createElement('div');
+  iconContainer.className = 'icon-container';
+  infoContainer.append(iconContainer)
+
+  const iconSwap = document.createElement('span');
+  iconSwap.className = 'icon-swap';
+  iconContainer.appendChild(iconSwap);
+
+  const favorite = document.createElement('i');
+  favorite.className = 'far fa-heart';
+  favorite.setAttribute('aria-label', 'Favorite Me!');
+  iconSwap.append(favorite);
+
+  const favorited = document.createElement('i');
+  favorited.className = 'fas fa-heart';
+  favorited.setAttribute('aria-label', 'Favorited!');
+  iconSwap.append(favorited);
+
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
   infoContainer.append(neighborhood);
