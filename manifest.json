@@ -6,6 +6,7 @@
   "short_name": "Restaurant Reviews",
   "description": "Progressive web app allowing user to map and view details of NYC restaurants by neighborhood and cuisine type",
   "background_color": "#cc2900",
+  "theme_color": "#cc2900",
   "icons": [
     {
       "src": "./client/src/img/restaurant-cutlery-circular-symbol-of-a-spoon-and-a-fork-in-a-circle-512x512.png",
