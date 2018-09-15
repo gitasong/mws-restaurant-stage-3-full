@@ -344,6 +344,25 @@ footer {
   line-height: 1.1;
 }
 
+#restaurant-name .icon-swap > i.far.fa-heart {
+  display: inline;
+  color: #cc2900;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+#restaurant-name .icon-swap:hover > i.far.fa-heart + i.fas.fa-heart {
+  display: inline;
+  color: #cc2900;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+#restaurant-name .icon-swap > i.far.fa-heart + i.fas.fa-heart,
+#restaurant-name .icon-swap:hover > i.far.fa-heart {
+  display: none;
+}
+
 #restaurant-img {
 	width: 100%;
 	min-width: 100%;
