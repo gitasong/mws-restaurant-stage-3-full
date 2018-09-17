@@ -171,21 +171,25 @@ const createRestaurantHTML = (restaurant) => {
 
   const iconContainer = document.createElement('div');
   iconContainer.className = 'icon-container';
-  infoContainer.append(iconContainer)
-
-  const iconSwap = document.createElement('span');
-  iconSwap.className = 'icon-swap';
-  iconContainer.appendChild(iconSwap);
+  infoContainer.append(iconContainer);
 
   const favorite = document.createElement('i');
   favorite.className = 'far fa-heart';
   favorite.setAttribute('aria-label', 'Favorite Me!');
-  iconSwap.append(favorite);
+  iconContainer.append(favorite);
 
-  const favorited = document.createElement('i');
-  favorited.className = 'fas fa-heart';
-  favorited.setAttribute('aria-label', 'Favorited!');
-  iconSwap.append(favorited);
+  favorite.addEventListener('click', function() {
+    let isSolid = false;
+    if (!isSolid) {
+      favorite.className = 'fas fa-heart';
+      favorite.setAttribute('aria-label', 'Favorited!');
+      isSolid = true;
+    } else {
+      favorite.className = 'far fa-heart';
+      favorite.setAttribute('aria-label', 'Favorite Me!');
+      isSolid = false;
+    }
+  });
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;

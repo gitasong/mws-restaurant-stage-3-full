@@ -277,7 +277,7 @@ footer {
   margin: 0 0 0.75rem;
 }
 
-#restaurants-list .icon-swap > i.far.fa-heart {
+#restaurants-list i.far.fa-heart {
   display: inline;
   color: #e32d00;
   font-size: 1.8rem;
@@ -286,18 +286,14 @@ footer {
   text-transform: uppercase;
 }
 
-#restaurants-list .icon-swap:hover > i.far.fa-heart + i.fas.fa-heart {
+#restaurants-list i.far.fa-heart:hover,
+#restaurants-list i.fas.fa-heart {
   display: inline;
   color: #e32d00;
   font-size: 1.8rem;
   font-weight: 900;
   line-height: 1.3;
   text-transform: uppercase;
-}
-
-#restaurants-list .icon-swap > i.far.fa-heart + i.fas.fa-heart,
-#restaurants-list .icon-swap:hover > i.far.fa-heart {
-  display: none;
 }
 
 #restaurants-list p {
@@ -344,23 +340,18 @@ footer {
   line-height: 1.1;
 }
 
-#restaurant-name .icon-swap > i.far.fa-heart {
+#restaurant-name i.far.fa-heart {
   display: inline;
   color: #cc2900;
   font-weight: 200;
   text-transform: uppercase;
 }
 
-#restaurant-name .icon-swap:hover > i.far.fa-heart + i.fas.fa-heart {
+#restaurant-name i.far.fa-heart:hover, #restaurant-name i.fas.fa-heart {
   display: inline;
   color: #cc2900;
   font-weight: 900;
   text-transform: uppercase;
-}
-
-#restaurant-name .icon-swap > i.far.fa-heart + i.fas.fa-heart,
-#restaurant-name .icon-swap:hover > i.far.fa-heart {
-  display: none;
 }
 
 #restaurant-img {
