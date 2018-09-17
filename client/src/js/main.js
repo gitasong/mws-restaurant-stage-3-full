@@ -176,6 +176,7 @@ const createRestaurantHTML = (restaurant) => {
   const favorite = document.createElement('i');
   favorite.className = 'far fa-heart';
   favorite.setAttribute('aria-label', 'Favorite Me!');
+  favorite.setAttribute('data-id', restaurant.id);
   iconContainer.append(favorite);
 
   favorite.addEventListener('click', function() {
