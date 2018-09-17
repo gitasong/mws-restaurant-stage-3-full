@@ -15,6 +15,14 @@ export default class DBHelper {
   }
 
   /**
+   * Database URL for reviews.
+   */
+  static get REVIEWS_URL() {
+    const port = 1337
+    return `http://localhost:${port}/reviews`;
+  }
+
+  /**
    * Opens and creates database
   */
   static openDatabase() {
