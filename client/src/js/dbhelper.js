@@ -7,11 +7,10 @@ import idb from 'idb';
 export default class DBHelper {
 
   /**
-   * Database URL.
-   * Change this to restaurants.json file location on your server.
+   * Database URL for restaurants.
    */
-  static get DATABASE_URL() {
-    const port = 1337 // Change this to your server port
+  static get RESTAURANTS_URL() {
+    const port = 1337
     return `http://localhost:${port}/restaurants`;
   }
 
@@ -35,7 +34,7 @@ export default class DBHelper {
    */
   // static serveRestaurants(callback) {
   //   let xhr = new XMLHttpRequest();
-  //   xhr.open('GET', DBHelper.DATABASE_URL);
+  //   xhr.open('GET', DBHelper.RESTAURANTS_URL);
   //   xhr.onload = () => {
   //     if (xhr.status === 200) { // Got a success response from server!
   //       const json = JSON.parse(xhr.responseText);
@@ -70,7 +69,7 @@ export default class DBHelper {
    * Fetch restaurants from server
    */
   static serveRestaurants(callback) {
-    fetch(DBHelper.DATABASE_URL)
+    fetch(DBHelper.RESTAURANTS_URL)
     .then(response => {
       if (!response.ok) throw new Error(`Request failed. Returned status of ${error}.`);
       return response.json()
