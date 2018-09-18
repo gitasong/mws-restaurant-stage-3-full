@@ -185,10 +185,12 @@ const createRestaurantHTML = (restaurant) => {
       favorite.className = 'fas fa-heart';
       favorite.setAttribute('aria-label', 'Favorited!');
       isSolid = true;
+      DBHelper.postFavorite(restaurant.id, isSolid);
     } else {
       favorite.className = 'far fa-heart';
       favorite.setAttribute('aria-label', 'Favorite Me!');
       isSolid = false;
+      DBHelper.postFavorite(restaurant.id, isSolid);
     }
   });
 
