@@ -38,6 +38,7 @@ export default class DBHelper {
     return status;
   }
 
+  /**
    * Opens and creates database
   */
   static openDatabase() {
@@ -157,7 +158,42 @@ export default class DBHelper {
   }
 
   /**
-   * Fetch a restaurant by its ID.
+   * Post a favorite to the server if online; to the database otherwise
+   */
+  static postFavorite(id, isFavorite) {
+    // checks if server online
+    const isOnline = DBHelper.pingServer(DBHelper.RESTAURANTS_URL);
+    // if server online, PUT favorite
+    if (isOnline) {
+      const init = { method: 'PUT' };
+      console.log(`PUT URL: ${DBHelper.RESTAURANTS_URL}/${id}/?is_favorite=${isFavorite}`);
+      return fetch(`${DBHelper.RESTAURANTS_URL}/${id}/?is_favorite=${isFavorite}`, init).then(serverResponse => serverResponse.json())
+      .then(serverResponseJSON => {
+        console.log(`Response from postFavorite: ${serverResponseJSON}`);
+        return serverResponseJSON;
+      }).catch((serverError) => console.log(`Failed to post favorite with error: ${serverError}`));
+    }
+    // if server offline, add favorite to IDB
+    else {
+      // add favorite to IDB
+      const dbPromise = openDatabase();
+
+      dbPromise.then(function(db) {
+        const tx = db.transaction('restaurantStore', 'readwrite');
+        const restaurantStore = tx.objectStore('restaurantStore');
+
+        restaurantStore.put({
+          id: id,
+          is_favorite: true
+        });
+
+        return tx.complete;
+      })
+      .then(() => console.log(`Favorited ${restaurant.name}, id ${restaurant.id}`))
+      .catch((databaseError) => console.log(`Failed to favorite ${restaurant.name}, id ${restaurant.id} with error ${databaseError}`));
+    }
+  }
+
    */
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
