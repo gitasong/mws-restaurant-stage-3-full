@@ -23,6 +23,21 @@ export default class DBHelper {
   }
 
   /**
+   * Pings appropriate server to see if online.
+   * Adapted from code by Laura Franklin, per my idea to ping the server
+   * Takes either RESTAURANTS_URL OR REVIEWS_URL as argument
+   */
+  static pingServer(server) {
+    console.log(`pingServer server: ${server}`);
+    const status = fetch(server).then(response => {
+      if (response.ok) { return true; }
+    }).catch(error => {
+      console.error('Error while pinging server: ', error);
+      return false;
+    });
+    return status;
+  }
+
    * Opens and creates database
   */
   static openDatabase() {
