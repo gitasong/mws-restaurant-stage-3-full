@@ -10,7 +10,7 @@ export default class DBHelper {
    * Database URL for restaurants.
    */
   static get RESTAURANTS_URL() {
-    const port = 1337
+    const port = 1337;
     return `http://localhost:${port}/restaurants`;
   }
 
@@ -18,7 +18,7 @@ export default class DBHelper {
    * Database URL for reviews.
    */
   static get REVIEWS_URL() {
-    const port = 1337
+    const port = 1337;
     return `http://localhost:${port}/reviews`;
   }
 
@@ -194,6 +194,8 @@ export default class DBHelper {
     }
   }
 
+  /**
+   *  Fetches a restaurant by its ID.
    */
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
