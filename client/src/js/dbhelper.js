@@ -97,6 +97,24 @@ export default class DBHelper {
 
   /**
    * Populate database with data from server
+   * Fetch reviews from server
+   */
+  static serveReviews(callback) {
+    fetch(DBHelper.REVIEWS_URL)
+    .then(response => {
+      if (!response.ok) throw new Error(`Reviews request failed. Returned status of ${error}.`);
+      return response.json()
+      .then(data => {
+        console.log('Data from serveReviews(): ', data);
+        const reviews = data;
+        console.log('Reviews from server: ', reviews);
+        callback(null, reviews);
+      }).catch((error) => {
+        callback(error, null);
+      });
+    })
+  }
+
    */
   static populateDatabase(callback) {
     console.log('Opening database within populateDatabase()');
