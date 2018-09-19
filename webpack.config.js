@@ -38,6 +38,11 @@ module.exports = {
         toType: 'dir'
       },
       {
+        from: 'src/webfonts/',
+        to: 'webfonts/',
+        toType: 'dir'
+      },
+      {
         from: 'src/img/',
         to: 'img/',
         toType: 'dir'
