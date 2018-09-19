@@ -54,25 +54,6 @@ export default class DBHelper {
   }
 
   /**
-   * Fetch all restaurants.
-   */
-  // static serveRestaurants(callback) {
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open('GET', DBHelper.RESTAURANTS_URL);
-  //   xhr.onload = () => {
-  //     if (xhr.status === 200) { // Got a success response from server!
-  //       const json = JSON.parse(xhr.responseText);
-  //       const restaurants = json.restaurants;
-  //       callback(null, restaurants);
-  //     } else { // Oops!. Got an error from server.
-  //       const error = (`Request failed. Returned status of ${xhr.status}`);
-  //       callback(error, null);
-  //     }
-  //   };
-  //   xhr.send();
-  // }
-
-  /**
    * Fetch restaurants from database if present; from server otherwise
    */
   static routeRestaurants(callback) {
@@ -165,7 +146,6 @@ export default class DBHelper {
   static postFavorite(restaurant, isFavorite) {
     // add favorite to IDB
     const dbPromise = DBHelper.openDatabase();
-
 
     dbPromise.then(function(db) {
       const tx = db.transaction('restaurants', 'readwrite');
