@@ -51,7 +51,10 @@ export default class DBHelper {
           upgradeDB.createObjectStore('restaurants', {keyPath: 'id'});
         case 2:
           console.log('Creating reviews store');
-          upgradeDB.createObjectStore('reviews', {keypath: 'id'});
+          upgradeDB.createObjectStore('reviews', {
+            keyPath: 'id',
+            autoIncrement: true
+          });
       }
     });
   }
