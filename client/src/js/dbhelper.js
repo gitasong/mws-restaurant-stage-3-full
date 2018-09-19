@@ -72,6 +72,9 @@ export default class DBHelper {
       } else {
         console.log('Displaying restaurants from server');
         DBHelper.populateRestaurants(callback);
+      }
+    });
+  }
 
   /**
    * Fetch restaurants from database if present; from server otherwise
@@ -96,7 +99,7 @@ export default class DBHelper {
   static serveRestaurants(callback) {
     fetch(DBHelper.RESTAURANTS_URL)
     .then(response => {
-      if (!response.ok) throw new Error(`Request failed. Returned status of ${error}.`);
+      if (!response.ok) throw new Error(`Restaurants request failed. Returned status of ${error}.`);
       return response.json()
       .then(data => {
         console.log('Data from serveRestaurants(): ', data);
@@ -110,7 +113,6 @@ export default class DBHelper {
   }
 
   /**
-   * Populate database with data from server
    * Fetch reviews from server
    */
   static serveReviews(callback) {
@@ -129,6 +131,8 @@ export default class DBHelper {
     })
   }
 
+  /**
+   * Populate database with restaurants data from server
    */
   static populateRestaurants(callback) {
     console.log('Opening database within populateRestaurants()');
@@ -148,9 +152,17 @@ export default class DBHelper {
           console.log('Result from populateRestaurants: ', result);
           callback(null, restaurants);
         })
+        .then(function() {
+          console.log('All restaurants added to database successfully!');
+        })
         .catch(function(error) {
           tx.abort();
           console.log(error);
+        });
+      })
+    });
+  }
+
   /**
    * Populate database with reviews data from server
    */
@@ -173,7 +185,6 @@ export default class DBHelper {
           callback(null, reviews);
         })
         .then(function() {
-          console.log('All items added successfully!'); // TODO:  Fix location of success message, because it will fire even on transaction abort
           console.log('All reviews added successfully!');
         })
         .catch(function(error) {
