@@ -78,12 +78,15 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   // name.append(iconSwap);
 
   const favorite = document.createElement('i');
-  favorite.className = 'far fa-heart';
-  favorite.setAttribute('aria-label', `Favorite Me!`);
+  let isSolid = restaurant.is_favorite;
+  console.log(`isSolid for ${restaurant.name}, id ${restaurant.id}: ${restaurant.is_favorite}`);
+  // console.log(typeof(restaurant.is_favorite));
+  isSolid ? favorite.className = 'fas fa-heart' : favorite.className = 'far fa-heart';
+  isSolid ? favorite.setAttribute('aria-label', 'Favorited!') : favorite.setAttribute('aria-label', 'Favorite Me!');
+  favorite.setAttribute('data-id', restaurant.id);
   name.append(favorite);
 
   favorite.addEventListener('click', function() {
-    let isSolid = false;
     if (!isSolid) {
       favorite.className = 'fas fa-heart';
       favorite.setAttribute('aria-label', 'Favorited!');
