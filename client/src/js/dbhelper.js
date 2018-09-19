@@ -137,9 +137,34 @@ export default class DBHelper {
         .catch(function(error) {
           tx.abort();
           console.log(error);
+  /**
+   * Populate database with reviews data from server
+   */
+  static populateReviews(callback) {
+    console.log('Opening database within populateReviews()');
+    const dbPromise = DBHelper.openDatabase();
+
+    dbPromise.then(function(db) {
+      DBHelper.serveReviews((error, reviews) => {
+        const tx = db.transaction('reviews', 'readwrite');
+        const reviewStore = tx.objectStore('reviews');
+
+        return Promise.all(
+          reviews.map(function(review) {
+            console.log('Adding review: ', review);
+            return reviewStore.put(review);
+          }
+        )).then(function(result) {
+          console.log('Result from populateReviews: ', result);
+          callback(null, reviews);
         })
         .then(function() {
           console.log('All items added successfully!'); // TODO:  Fix location of success message, because it will fire even on transaction abort
+          console.log('All reviews added successfully!');
+        })
+        .catch(function(error) {
+          tx.abort();
+          console.log(error);
         });
       })
     });
