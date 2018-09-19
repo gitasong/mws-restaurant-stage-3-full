@@ -91,10 +91,12 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
       favorite.className = 'fas fa-heart';
       favorite.setAttribute('aria-label', 'Favorited!');
       isSolid = true;
+      DBHelper.postFavorite(restaurant, isSolid);
     } else {
       favorite.className = 'far fa-heart';
       favorite.setAttribute('aria-label', 'Favorite Me!');
       isSolid = false;
+      DBHelper.postFavorite(restaurant, isSolid);
     }
   });
 
