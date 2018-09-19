@@ -71,7 +71,7 @@ export default class DBHelper {
         return restaurants;
       } else {
         console.log('Displaying restaurants from server');
-        DBHelper.populateDatabase(callback);
+        DBHelper.populateRestaurants(callback);
 
   /**
    * Fetch restaurants from database if present; from server otherwise
@@ -130,8 +130,8 @@ export default class DBHelper {
   }
 
    */
-  static populateDatabase(callback) {
-    console.log('Opening database within populateDatabase()');
+  static populateRestaurants(callback) {
+    console.log('Opening database within populateRestaurants()');
     const dbPromise = DBHelper.openDatabase();
 
     dbPromise.then(function(db) {
@@ -145,7 +145,7 @@ export default class DBHelper {
             return restaurantStore.put(restaurant);
           }
         )).then(function(result) {
-          console.log('Result from populateDatabase: ', result);
+          console.log('Result from populateRestaurants: ', result);
           callback(null, restaurants);
         })
         .catch(function(error) {
