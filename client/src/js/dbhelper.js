@@ -158,39 +158,43 @@ export default class DBHelper {
   }
 
   /**
-   * Post a favorite to the server if online; to the database otherwise
+   * Post a favorite to the IDB first, then the
+   * server if online; if not online, notifies user
+   * that changes will be submitted when online
    */
-  static postFavorite(id, isFavorite) {
+  static postFavorite(restaurant, isFavorite) {
+    // add favorite to IDB
+    const dbPromise = DBHelper.openDatabase();
+
+
+    dbPromise.then(function(db) {
+      const tx = db.transaction('restaurants', 'readwrite');
+      const restaurantStore = tx.objectStore('restaurants');
+
+      restaurant.is_favorite = isFavorite;
+
+      restaurantStore.put(restaurant);
+
+      return tx.complete;
+    })
+    .then(() => console.log(`Favorited ${restaurant.name}, id ${restaurant.id}`))
+    .catch((databaseError) => console.log(`Failed to favorite ${restaurant.name}, id ${restaurant.id} with error ${databaseError}`));
+
     // checks if server online
     const isOnline = DBHelper.pingServer(DBHelper.RESTAURANTS_URL);
     // if server online, PUT favorite
     if (isOnline) {
       const init = { method: 'PUT' };
-      console.log(`PUT URL: ${DBHelper.RESTAURANTS_URL}/${id}/?is_favorite=${isFavorite}`);
-      return fetch(`${DBHelper.RESTAURANTS_URL}/${id}/?is_favorite=${isFavorite}`, init).then(serverResponse => serverResponse.json())
+      console.log(`PUT URL: ${DBHelper.RESTAURANTS_URL}/${restaurant.id}/?is_favorite=${isFavorite}`);
+      return fetch(`${DBHelper.RESTAURANTS_URL}/${restaurant.id}/?is_favorite=${isFavorite}`, init).then(serverResponse => serverResponse.json())
       .then(serverResponseJSON => {
         console.log(`Response from postFavorite: ${serverResponseJSON}`);
         return serverResponseJSON;
       }).catch((serverError) => console.log(`Failed to post favorite with error: ${serverError}`));
     }
-    // if server offline, add favorite to IDB
     else {
-      // add favorite to IDB
-      const dbPromise = openDatabase();
-
-      dbPromise.then(function(db) {
-        const tx = db.transaction('restaurantStore', 'readwrite');
-        const restaurantStore = tx.objectStore('restaurantStore');
-
-        restaurantStore.put({
-          id: id,
-          is_favorite: true
-        });
-
-        return tx.complete;
-      })
-      .then(() => console.log(`Favorited ${restaurant.name}, id ${restaurant.id}`))
-      .catch((databaseError) => console.log(`Failed to favorite ${restaurant.name}, id ${restaurant.id} with error ${databaseError}`));
+      // if server offline, notify user and post when online
+      console.log('Server connection has been lost. Your post will be submitted when the server comes online.');
     }
   }
 
