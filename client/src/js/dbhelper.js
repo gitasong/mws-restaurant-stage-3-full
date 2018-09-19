@@ -72,6 +72,20 @@ export default class DBHelper {
       } else {
         console.log('Displaying restaurants from server');
         DBHelper.populateDatabase(callback);
+
+  /**
+   * Fetch restaurants from database if present; from server otherwise
+   */
+  static routeReviews(callback) {
+    DBHelper.getReviews()
+    .then((reviews) => {
+      if (reviews.length) {
+        console.log('Displaying reviews from database', reviews);
+        if (callback) callback(null, reviews);
+        return reviews;
+      } else {
+        console.log('Displaying reviews from server');
+        DBHelper.populateReviews(callback);
       }
     });
   }
