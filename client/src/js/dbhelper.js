@@ -42,13 +42,16 @@ export default class DBHelper {
    * Opens and creates database
   */
   static openDatabase() {
-    return idb.open('restaurants', 1, function(upgradeDB) {
+    return idb.open('restaurants', 2, function(upgradeDB) {
       switch(upgradeDB.oldVersion) {
         case 0:
           // placeholder
         case 1:
           console.log('Creating restaurants store');
           upgradeDB.createObjectStore('restaurants', {keyPath: 'id'});
+        case 2:
+          console.log('Creating reviews store');
+          upgradeDB.createObjectStore('reviews', {keypath: 'id'});
       }
     });
   }
