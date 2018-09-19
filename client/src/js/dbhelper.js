@@ -188,6 +188,23 @@ export default class DBHelper {
   }
 
   /**
+   * Get reviews from database
+   */
+  static getReviews() {
+    const dbPromise = DBHelper.openDatabase();
+
+    return dbPromise.then(function(db) {
+      const tx = db.transaction('reviews', 'readonly');
+      const reviewStore = tx.objectStore('reviews');
+      return reviewStore.getAll()
+      .then(reviews => {
+        console.log('Got reviews from database: ', reviews);
+        return reviews;
+      });
+    }).catch((error) => console.error('Error fetching reviews from database', error));
+  }
+
+  /**
    * Post a favorite to the IDB first, then the
    * server if online; if not online, notifies user
    * that changes will be submitted when online
