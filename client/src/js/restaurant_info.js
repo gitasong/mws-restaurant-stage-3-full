@@ -190,7 +190,8 @@ const createReviewHTML = (review) => {
 
   const date = document.createElement('p');
   date.className = 'review-date';
-  date.innerHTML = review.date;
+  const reviewDate = new Date(review.createdAt);
+  date.innerHTML = reviewDate.toDateString();
   reviewHeader.appendChild(date);
   li.appendChild(reviewHeader);
 
