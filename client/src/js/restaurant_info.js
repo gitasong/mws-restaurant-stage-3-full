@@ -137,11 +137,11 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
       console.log("Error getting reviews from routeReviews(): ", error);
     } else {
       console.log("Reviews result from routeReviews(): ", results);
+      fillReviewsHTML(results);
       return results;
     }
   }, restaurantID);
 
-  fillReviewsHTML(self.reviews);
 }
 
 /**
