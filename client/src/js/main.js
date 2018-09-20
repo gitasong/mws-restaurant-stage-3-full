@@ -15,7 +15,13 @@ let markers = [];
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap(); // added
   // Fetch restaurants from server and populate database
-  DBHelper.routeRestaurants();
+  DBHelper.routeRestaurants((error, restaurants) => {
+    if (error) {
+      console.log("Error getting restaurants from routeRestaurants(): ", error);
+    } else {
+      console.log("Reviews result from routeRestaurants(): ", restaurants);
+    }
+  });
   DBHelper.routeReviews((error, reviews) => {
     if (error) {
       console.log("Error getting reviews from routeReviews(): ", error);
