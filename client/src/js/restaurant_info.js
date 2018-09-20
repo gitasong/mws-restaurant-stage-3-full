@@ -4,6 +4,7 @@ require('./swRegistration.js');
 import DBHelper from './dbhelper.js';
 
 let restaurant;
+let reviews;
 var newMap;  // I'm leaving this variable declared with var, per the original code, because the map actually doesn't load with let (try it!)
 
 /**
@@ -12,16 +13,18 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap();
 
-  let params = (new URL(window.location)).searchParams;
-  let restaurantID = parseInt(params.get('id'));
-  
-  DBHelper.routeReviews((error, reviews) => {
-    if (error) {
-      console.log("Error getting reviews from routeReviews(): ", error);
-    } else {
-      console.log("Reviews result from routeReviews(): ", reviews);
-    }
-  }, restaurantID);
+  // let params = (new URL(window.location)).searchParams;
+  // let restaurantID = parseInt(params.get('id'));
+  //
+  // DBHelper.routeReviews((error, results) => {
+  //   if (error) {
+  //     console.log("Error getting reviews from routeReviews(): ", error);
+  //   } else {
+  //     console.log("Reviews result from routeReviews(): ", results);
+  //   }
+  // }, restaurantID);
+
+  // return reviews;
 });
 
 /**
@@ -126,7 +129,19 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
   // fill reviews
-  fillReviewsHTML();
+  let params = (new URL(window.location)).searchParams;
+  let restaurantID = parseInt(params.get('id'));
+
+  self.reviews = DBHelper.routeReviews((error, results) => {
+    if (error) {
+      console.log("Error getting reviews from routeReviews(): ", error);
+    } else {
+      console.log("Reviews result from routeReviews(): ", results);
+      return results;
+    }
+  }, restaurantID);
+
+  fillReviewsHTML(self.reviews);
 }
 
 /**
@@ -152,7 +167,7 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-const fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+const fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
