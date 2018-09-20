@@ -79,7 +79,7 @@ export default class DBHelper {
   /**
    * Fetch restaurants from database if present; from server otherwise
    */
-  static routeReviews(callback) {
+  static routeReviews(callback, id) {
     DBHelper.getReviews()
     .then((reviews) => {
       if (reviews.length) {
@@ -88,7 +88,7 @@ export default class DBHelper {
         return reviews;
       } else {
         console.log('Displaying reviews from server');
-        DBHelper.populateReviews(callback);
+        DBHelper.populateReviews(callback, id);
       }
     });
   }
@@ -166,7 +166,7 @@ export default class DBHelper {
   /**
    * Populate database with reviews data from server
    */
-  static populateReviews(callback) {
+  static populateReviews(callback, id) {
     console.log('Opening database within populateReviews()');
     const dbPromise = DBHelper.openDatabase();
 
@@ -191,7 +191,7 @@ export default class DBHelper {
           tx.abort();
           console.log(error);
         });
-      })
+      }, id)
     });
   }
 
