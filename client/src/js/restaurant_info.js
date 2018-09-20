@@ -12,19 +12,6 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap();
-
-  // let params = (new URL(window.location)).searchParams;
-  // let restaurantID = parseInt(params.get('id'));
-  //
-  // DBHelper.routeReviews((error, results) => {
-  //   if (error) {
-  //     console.log("Error getting reviews from routeReviews(): ", error);
-  //   } else {
-  //     console.log("Reviews result from routeReviews(): ", results);
-  //   }
-  // }, restaurantID);
-
-  // return reviews;
 });
 
 /**
