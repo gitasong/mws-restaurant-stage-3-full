@@ -115,8 +115,8 @@ export default class DBHelper {
   /**
    * Fetch reviews from server
    */
-  static serveReviews(callback) {
-    fetch(DBHelper.REVIEWS_URL)
+  static serveReviews(callback, id) {
+    fetch(`${DBHelper.REVIEWS_URL}/?restaurant_id=${id}`)
     .then(response => {
       if (!response.ok) throw new Error(`Reviews request failed. Returned status of ${error}.`);
       return response.json()
