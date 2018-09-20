@@ -11,7 +11,13 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap();
-  DBHelper.openDatabase();
+  DBHelper.routeReviews((error, reviews) => {
+    if (error) {
+      console.log("Error getting reviews from routeReviews(): ", error);
+    } else {
+      console.log("Reviews result from routeReviews(): ", reviews);
+    }
+  });
 });
 
 /**
