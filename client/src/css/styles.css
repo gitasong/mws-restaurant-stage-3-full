@@ -382,12 +382,40 @@ footer {
   color: #666;
 }
 
-#reviews-container h2 {
+#reviews-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+#reviews-header span {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+#reviews-header span h2 {
+  display: inline-block;
   color: #cc2900;
   font-size: 2rem;  /* 24pt */
   font-weight: 300;
   letter-spacing: -1px;
   margin: 0;
+}
+
+#reviews-header span button {
+  display: inline-block;
+  background-color: #e32d00;
+  color: #fff;
+  font-size: 1.2rem;  /* 16pt */
+  line-height: 1.5;
+  margin: 1rem 0 0 2rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+#reviews-header span button:hover {
+  background-color: #cc2900;
 }
 
 #reviews-list {
