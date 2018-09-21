@@ -68,6 +68,13 @@ module.exports = {
       chunks: ['restaurant_info', 'leaflet'],
       inject: 'body'
     }),
+    new HtmlWebpackPlugin({
+      title: 'Restaurant Reviews | Add A Review',
+      template: './client/src/reviews_form.html',  // origin file
+      filename: 'reviews_form.html',  // destination file in public
+      chunks: ['restaurant_info'],
+      inject: 'body'
+    }),
     new CompressionPlugin({
       include: './client/src/*/'
     }),
