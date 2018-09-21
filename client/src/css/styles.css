@@ -378,6 +378,10 @@ footer {
 	width: 100%;
 }
 
+#restaurant-hours td {
+  color: #666;
+}
+
 #reviews-container h2 {
   color: #cc2900;
   font-size: 2rem;  /* 24pt */
@@ -444,8 +448,84 @@ footer {
 	padding-right: 2rem;
 }
 
-#restaurant-hours td {
-  color: #666;
+
+/* ====================== Reviews Form ====================== */
+
+.reviews-form-container {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	background-color: #fff;
+	border: 2px solid #f3f3f3;
+	border-radius: 40px 0 40px 0;
+	margin: 0 0 2rem 0;
+	padding: 0 0 2rem 0;
+	overflow: hidden;
+  width: 100%;
+}
+
+.reviews-form-header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: baseline;
+	background-color: #cc2900;
+	padding: 1rem 2rem 0.6rem 2rem;
+}
+
+.reviews-form-header p {
+  color: #fff;
+	font-size: 1.6rem;  /* 16pt */
+	font-weight: 200;
+}
+
+.reviews-form-body {
+  background-color: #fff;
+	border: 2px solid #f3f3f3;
+	border-radius: 40px 0 40px 0;
+	display: block;
+	list-style-type: none;
+	margin: 0 0 2rem 0;
+	padding: 0 0 1rem 0;
+	overflow: hidden;
+  /* width: 100%; */
+}
+
+.reviews-form-inner-container {
+  margin: 1rem 2rem 0 2rem;
+	/* padding: 0.5rem 0.5rem 0.5rem 0.5rem; */
+}
+
+#reviews-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#reviews-form label {
+  margin-top: 1.5rem;
+}
+
+#reviews-form input, #reviews-form textarea {
+  border-top: 0;
+  border-bottom: 2px solid #cc2900;
+  border-left: 0;
+  border-right: 0;
+}
+
+#reviews-form input, #reviews-form select {
+  height: 2rem;
+}
+
+#reviews-form button {
+  display: inline-block;
+	background-color: #e32d00;
+	color: #fff;
+  font-size: 1.2rem;
+  line-height: 1.5;
+	margin: 1.5rem 0 0 0;
+	padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 
