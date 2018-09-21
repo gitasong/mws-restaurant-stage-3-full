@@ -164,7 +164,7 @@ const fillReviewsHTML = (reviews = self.reviews) => {
   titleSpan.appendChild(title);
   header.appendChild(titleSpan);
   const buttonSpan = document.createElement('span');
-  const addButton = document.createElement('button');
+  const addButton = document.createElement('a');
   addButton.innerHTML = 'Add A Review';
   buttonSpan.appendChild(addButton);
   header.appendChild(buttonSpan);

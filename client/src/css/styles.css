@@ -404,7 +404,7 @@ footer {
   margin: 0;
 }
 
-#reviews-header span button {
+#reviews-header span a {
   display: inline-block;
   background-color: #e32d00;
   color: #fff;
@@ -414,7 +414,7 @@ footer {
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-#reviews-header span button:hover {
+#reviews-header span a:hover {
   background-color: #cc2900;
 }
 
