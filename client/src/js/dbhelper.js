@@ -385,6 +385,13 @@ export default class DBHelper {
   }
 
   /**
+   * Reviews form page URL for individual restaurants.
+   */
+  static urlForReviewsForm(restaurant) {
+    return (`./reviews_form.html?id=${restaurant.id}`);
+  }
+
+  /**
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
