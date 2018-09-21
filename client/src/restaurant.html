@@ -54,33 +54,37 @@
     <!-- Beginning reviews -->
     <section id="reviews-container">
       <ul id="reviews-list"></ul>
+      <!-- Beginning reviews form -->
+      <div class="reviews-form-container">
+        <div class="reviews-form-header">
+          <p>Add A Review for <span class="form-restaurant-name">**Restaurant Name**</span></p>
+        </div>
+        <div class="reviews-form-inner-container">
+          <form id="reviews-form">
+            <div class="form-group">
+              <label for="username">Name:</label>
+              <input type="text" class="form-control" id="review-username">
+            </div>
+            <div class="form-group">
+              <label for="review-rating">Choose a rating:</label>
+              <select class="form-control" id="review-rating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="review-text">Describe your experience at this restaurant:</label>
+              <textarea class="form-control" id="review-text" rows="7"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+          </form>
+        </div>
+      </div>
+      <!-- End reviews form -->
     </section>
-    <!-- Beginning reviews form -->
-    <section id="reviews-form">
-      <h2>Add A Review</h2>
-      <form>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" class="form-control" id="review-username" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <label for="review-rating">Choose a rating:</label>
-          <select class="form-control" id="review-rating">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="review-text">Describe your experience at this restaurant:</label>
-          <textarea class="form-control" id="review-text" rows="5"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit Review</button>
-      </form>
-    </section>
-    <!-- End reviews form -->
     <!-- End reviews -->
   </main>
   <!-- End main -->
