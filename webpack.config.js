@@ -55,14 +55,14 @@ module.exports = {
     ], {context: './client/'}),
     new UglifyJsPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Restaurant Reviews, Stage 2',
+      title: 'Restaurant Reviews, Stage 3',
       template: './client/src/index.html',  // origin file
       filename: 'index.html',  // destination file in public
       chunks: ['main', 'leaflet'],
       inject: 'body'
     }),
     new HtmlWebpackPlugin({
-      title: 'Restaurant Reviews, Stage 2',
+      title: 'Restaurant Reviews, Stage 3',
       template: './client/src/restaurant.html',  // origin file
       filename: 'restaurant.html',  // destination file in public
       chunks: ['restaurant_info', 'leaflet'],
