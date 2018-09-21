@@ -156,9 +156,19 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
  */
 const fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
+  const header = document.createElement('div');
+  header.setAttribute('id', 'reviews-header');
+  const titleSpan = document.createElement('span');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
-  container.appendChild(title);
+  titleSpan.appendChild(title);
+  header.appendChild(titleSpan);
+  const buttonSpan = document.createElement('span');
+  const addButton = document.createElement('button');
+  addButton.innerHTML = 'Add A Review';
+  buttonSpan.appendChild(addButton);
+  header.appendChild(buttonSpan);
+  container.appendChild(header);
 
   if (!reviews) {
     const noReviews = document.createElement('p');
