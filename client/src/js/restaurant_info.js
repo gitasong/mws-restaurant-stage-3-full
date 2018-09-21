@@ -166,6 +166,7 @@ const fillReviewsHTML = (reviews = self.reviews) => {
   const buttonSpan = document.createElement('span');
   const addButton = document.createElement('a');
   addButton.innerHTML = 'Add A Review';
+  addButton.href = DBHelper.urlForReviewsForm(restaurant = self.restaurant);
   buttonSpan.appendChild(addButton);
   header.appendChild(buttonSpan);
   container.appendChild(header);
