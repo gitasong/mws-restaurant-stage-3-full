@@ -42,7 +42,7 @@ export default class DBHelper {
    * Opens and creates database
   */
   static openDatabase() {
-    return idb.open('restaurants', 2, function(upgradeDB) {
+    return idb.open('restaurants', 3, function(upgradeDB) {
       switch(upgradeDB.oldVersion) {
         case 0:
           // placeholder
@@ -55,6 +55,9 @@ export default class DBHelper {
             keyPath: 'id',
             autoIncrement: true
           });
+        case 3:
+          console.log('Creating temporary reviews store');
+          upgradeDB.createObjectStore('tempReviews', {keyPath: 'id'});
       }
     });
   }
