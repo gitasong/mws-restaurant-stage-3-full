@@ -18,6 +18,7 @@ self.addEventListener('install', (event) => {
         'reviews_form.html',
         'js/main.js',
         'js/restaurant_info.js',
+        'js/reviews_form.js',
         'js/leaflet.js',
         'css/styles.css',
         'css/leaflet.css',
