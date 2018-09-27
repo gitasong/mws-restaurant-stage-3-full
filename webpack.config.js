@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     main: './client/src/js/main.js',
     restaurant_info: './client/src/js/restaurant_info.js',
+    reviews_form: './client/src/js/reviews_form.js',
     leaflet: './client/src/js/leaflet.js',
   },
   output: {
@@ -72,7 +73,7 @@ module.exports = {
       title: 'Restaurant Reviews | Add A Review',
       template: './client/src/reviews_form.html',  // origin file
       filename: 'reviews_form.html',  // destination file in public
-      chunks: ['restaurant_info'],
+      chunks: ['reviews_form'],
       inject: 'body'
     }),
     new CompressionPlugin({
