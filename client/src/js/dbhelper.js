@@ -282,20 +282,6 @@ export default class DBHelper {
    * TODO: Will need to create function to post reviews when server is back online
    */
   static postReview(review) {
-    // add favorite to IDB
-    const dbPromise = DBHelper.openDatabase();
-
-    dbPromise.then(function(db) {
-      const tx = db.transaction('tempReviews', 'readwrite');
-      const tempReviewsStore = tx.objectStore('tempReviews');
-
-      tempReviewsStore.put(review);
-
-      return tx.complete;
-    })
-    .then(() => console.log(`Saved review id ${review.id} to tempReviews`))
-    .catch((databaseError) => console.log(`Failed to save review id ${review.id} to database with error ${databaseError}`));
-
     // checks if server online
     DBHelper.pingServer(DBHelper.REVIEWS_URL)
     .then(isOnline => {
@@ -316,7 +302,23 @@ export default class DBHelper {
         }).catch((serverError) => console.log(`Failed to post review ${review.name} with error: ${serverError}`));
       }
       else {
-        // if server offline, notify user and post when online
+        // if app/server offline, save review to tempReviews object store, **TODO: notify user,** and post when app/server online
+        console.log('Opening database within postReview()');
+        const dbPromise = DBHelper.openDatabase();
+
+        dbPromise.then(function(db) {
+          const tx = db.transaction('tempReviews', 'readwrite');
+          const tempReviewsStore = tx.objectStore('tempReviews');
+
+          console.log(`Putting review ${review} into tempReviews object store`);
+          tempReviewsStore.put(review);
+          console.log(`Have put review ${review} into tempReviews object store`);
+
+          console.log('tx.complete:', tx.complete);
+          return tx.complete;
+        }).then((review) => console.log(`Saved review ${review} to tempReviews`))
+        .catch((databaseError) => console.log(`Failed to save review ${review} to database with error ${databaseError}`));
+
         console.log('Server connection has been lost. Your review will be submitted when the server comes online.');
       }
     }).catch(pingError => console.log('Failed to ping server with error', pingError));
