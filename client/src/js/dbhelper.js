@@ -57,7 +57,10 @@ export default class DBHelper {
           });
         case 3:
           console.log('Creating temporary reviews store');
-          upgradeDB.createObjectStore('tempReviews', {keyPath: 'id'});
+          upgradeDB.createObjectStore('tempReviews', {
+            keyPath: 'id',
+            autoIncrement: true
+        });
       }
     });
   }
