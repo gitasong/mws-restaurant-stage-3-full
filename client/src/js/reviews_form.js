@@ -30,14 +30,13 @@ window.submitFormData = (event) => {
   console.log(formData);
 
   // post new review using form data to database and server, if online
-  DBHelper.postReview(formData)
-    .then(() => {
-      console.log('called postReview');
+  DBHelper.postReview(formData);
+  console.log('called postReview');
+  console.log(`params: ${params}`);
+  console.log(`restaurantID: ${restaurantID}`);
 
-      // reset form fields
-      reviewUsername = '';
-      reviewRating = '';
-      reviewText = '';
-      window.location.replace(DBHelper.urlForRestaurant(restaurantID));
-    })
+  // reset form fields
+  reviewUsername = '';
+  reviewRating = '';
+  reviewText = '';
 }
