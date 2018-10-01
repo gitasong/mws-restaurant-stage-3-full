@@ -39,4 +39,7 @@ window.submitFormData = (event) => {
   reviewUsername = '';
   reviewRating = '';
   reviewText = '';
+  // redirect to restaurant page
+  console.log(`Redirecting to: ./restaurant.html?id=${restaurantID}`);
+  window.location.replace(`./restaurant.html?id=${restaurantID}`);
 }
