@@ -117,7 +117,9 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   // fill reviews
   let params = (new URL(window.location)).searchParams;
+  console.log(`params: ${params}`);
   let restaurantID = parseInt(params.get('id'));
+  console.log(`restaurantID: ${restaurantID}`);
 
   self.reviews = DBHelper.routeReviews((error, results) => {
     if (error) {
