@@ -121,16 +121,14 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   let restaurantID = parseInt(params.get('id'));
   console.log(`restaurantID: ${restaurantID}`);
 
-  self.reviews = DBHelper.routeReviews((error, results) => {
+  DBHelper.populateReviews((error, results) => {
     if (error) {
-      console.log("Error getting reviews from routeReviews(): ", error);
+      console.log("Error populating reviews in populateReviews(): ", error);
     } else {
-      console.log("Reviews result from routeReviews(): ", results);
+      console.log("Reviews result from populateReviews(): ", results);
       fillReviewsHTML(results);
-      return results;
     }
-  }, restaurantID);
-
+  }, self.restaurant.id);
 }
 
 /**
