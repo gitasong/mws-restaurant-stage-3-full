@@ -126,9 +126,15 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
       console.log("Error populating reviews in populateReviews(): ", error);
     } else {
       console.log("Reviews result from populateReviews(): ", results);
-      fillReviewsHTML(results);
+      // fillReviewsHTML(results);
     }
   }, self.restaurant.id);
+
+  DBHelper.getReviews()
+  .then((allReviews) => {
+    console.log(`Reviews from reviews object store + tempReviews objectStore: ${allReviews}`);
+    fillReviewsHTML(allReviews);
+  }).catch(allReviewsError => console.log('Failed to get reviews from both object stores with error', allReviewsError));
 }
 
 /**
