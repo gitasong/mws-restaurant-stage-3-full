@@ -224,15 +224,32 @@ export default class DBHelper {
   static getReviews() {
     const dbPromise = DBHelper.openDatabase();
 
-    return dbPromise.then(function(db) {
+    let allReviews = [];
+
+    const savedReviews = dbPromise.then(function(db) {
       const tx = db.transaction('reviews', 'readonly');
       const reviewStore = tx.objectStore('reviews');
       return reviewStore.getAll()
       .then(reviews => {
-        console.log('Got reviews from database: ', reviews);
+        console.log('Got reviews from reviews object store: ', reviews);
         return reviews;
       });
-    }).catch((error) => console.error('Error fetching reviews from database', error));
+    }).catch((reviewsError) => console.error('Error fetching reviews from reviews object store', reviewsError));
+
+    const tempReviews = dbPromise.then(function(db) {
+      const tx = db.transaction('tempReviews', 'readonly');
+      const tempReviewStore = tx.objectStore('tempReviews');
+      return tempReviewStore.getAll()
+      .then(tempReviews => {
+        console.log('Got reviews from tempReviews object store: ', tempReviews);
+        return tempReviews;
+      });
+    }).catch((tempReviewsError) => console.error('Error fetching reviews from tempReviews object store', tempReviewsError));
+
+    allReviews.push(savedReviews);
+    allReviews.push(tempReviews);
+    console.log('allReviews from getReviews():', allReviews);
+    return allReviews;
   }
 
   /**
@@ -316,10 +333,12 @@ export default class DBHelper {
           console.log('tx.complete:', tx.complete);
           return tx.complete;
         }).then((review) => console.log(`Saved review ${review} to tempReviews`))
-        .catch((databaseError) => console.log(`Failed to save review ${review} to database with error ${databaseError}`));
+        .catch((databaseError) => {
+          console.log(`Failed to save review ${review} to database with error ${databaseError}`);
 
-        console.log('Server connection has been lost. Your review will be submitted when the server comes online.');
-      }
+          console.log('Server connection has been lost. Your review will be submitted when the server comes online.');
+        }
+      )};
     }).catch(pingError => console.log('Failed to ping server with error', pingError));
   }
 
