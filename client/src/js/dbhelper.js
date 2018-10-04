@@ -295,15 +295,14 @@ export default class DBHelper {
           body: JSON.stringify(review)
         };
         console.log(`POST URL: ${DBHelper.REVIEWS_URL}`);
-        return fetch(`${DBHelper.REVIEWS_URL}`, init).then(serverResponse => serverResponse.json())
-        .then(serverResponseJSON => {
-          console.log(`Response from postReview: ${serverResponseJSON}`);
-          return serverResponseJSON;
-        }).catch((serverError) => console.log(`Failed to post review ${review.name} with error: ${serverError}`));
-      }
-      else {
+        return fetch(`${DBHelper.REVIEWS_URL}`, init)
+        .then(serverResponse => {
+          console.log(`Response from postReview: ${serverResponse}`);
+          return serverResponse;
+        }).catch(serverError => console.log(`Failed to post review ${review.name} with error: ${serverError}`));
+      } else {
         // if app/server offline, save review to tempReviews object store, **TODO: notify user,** and post when app/server online
-        console.log('Opening database within postReview()');
+        console.log('Opening tempReviews database within postReview()');
         const dbPromise = DBHelper.openDatabase();
 
         dbPromise.then(function(db) {
