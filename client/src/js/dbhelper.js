@@ -224,8 +224,6 @@ export default class DBHelper {
   static getReviews() {
     const dbPromise = DBHelper.openDatabase();
 
-    let allReviews = [];
-
     const savedReviews = dbPromise.then(function(db) {
       const tx = db.transaction('reviews', 'readonly');
       const reviewStore = tx.objectStore('reviews');
@@ -234,7 +232,9 @@ export default class DBHelper {
         console.log('Got reviews from reviews object store: ', reviews);
         return reviews;
       });
-    }).catch((reviewsError) => console.error('Error fetching reviews from reviews object store', reviewsError));
+    }).catch(reviewsError => {
+      console.error('Error fetching reviews from reviews object store', reviewsError);
+    });
 
     const tempReviews = dbPromise.then(function(db) {
       const tx = db.transaction('tempReviews', 'readonly');
@@ -244,12 +244,11 @@ export default class DBHelper {
         console.log('Got reviews from tempReviews object store: ', tempReviews);
         return tempReviews;
       });
-    }).catch((tempReviewsError) => console.error('Error fetching reviews from tempReviews object store', tempReviewsError));
+    }).catch(tempReviewsError => {
+      console.error('Error fetching reviews from tempReviews object store', tempReviewsError)
+    });
 
-    allReviews.push(savedReviews);
-    allReviews.push(tempReviews);
-    console.log('allReviews from getReviews():', allReviews);
-    return allReviews;
+    return Promise.all([savedReviews, tempReviews]);
   }
 
   /**
