@@ -149,6 +149,8 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
     } else {
       console.log("Reviews result from routeReviews(): ", results);
       results = results.filter(r => r.restaurant_id == restaurantID);
+      // TODO: Possibly delete non-subsetted reviews at this point?
+      // TODO: Move filtering function higher up, so that filtering occurs before UI filling?
       fillReviewsHTML(results);
       return results;
     }
