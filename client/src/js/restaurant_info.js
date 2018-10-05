@@ -131,7 +131,14 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   }, self.restaurant.id);
 
   DBHelper.getReviews()
-  .then((allReviews) => {
+  .then(objectStores => {
+    let allReviews = [];
+    objectStores.forEach(store => {
+      store.forEach(review => {
+        allReviews.push(review);
+      });
+    });
+
     console.log(`Reviews from reviews object store + tempReviews objectStore: ${allReviews}`);
     fillReviewsHTML(allReviews);
   }).catch(allReviewsError => console.log('Failed to get reviews from both object stores with error', allReviewsError));
