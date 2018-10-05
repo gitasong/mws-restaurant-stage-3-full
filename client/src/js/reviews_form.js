@@ -25,7 +25,9 @@ window.submitFormData = (event) => {
     "restaurant_id": restaurantID,
     "name": reviewUsername,
     "rating": reviewRating,
-    "comments": reviewText
+    "comments": reviewText,
+    "createdAt": Date.now(),
+    "modifiedAt": Date.now()
   };
   console.log(formData);
 
