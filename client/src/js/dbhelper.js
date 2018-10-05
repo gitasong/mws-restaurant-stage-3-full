@@ -234,6 +234,7 @@ export default class DBHelper {
       });
     }).catch(reviewsError => {
       console.error('Error fetching reviews from reviews object store', reviewsError);
+      return [];
     });
 
     const tempReviews = dbPromise.then(function(db) {
@@ -246,6 +247,7 @@ export default class DBHelper {
       });
     }).catch(tempReviewsError => {
       console.error('Error fetching reviews from tempReviews object store', tempReviewsError)
+      return [];
     });
 
     return Promise.all([savedReviews, tempReviews]);
