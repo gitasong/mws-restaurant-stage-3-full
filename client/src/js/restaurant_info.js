@@ -148,6 +148,7 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
       console.log("Error getting reviews from routeReviews(): ", error);
     } else {
       console.log("Reviews result from routeReviews(): ", results);
+      results = results.filter(r => r.restaurant_id == restaurantID);
       fillReviewsHTML(results);
       return results;
     }
