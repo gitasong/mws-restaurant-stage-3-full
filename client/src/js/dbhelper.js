@@ -87,11 +87,18 @@ export default class DBHelper {
    */
   static routeReviews(callback, id) {
     DBHelper.getReviews()
-    .then((reviews) => {
-      if (reviews.length) {
-        console.log('Displaying reviews from database', reviews);
-        if (callback) callback(null, reviews);
-        return reviews;
+    .then((objectStores) => {
+      let allReviews = [];
+      objectStores.forEach(store => {
+        store.forEach(review => {
+          allReviews.push(review);
+        });
+      });
+
+      if (allReviews.length) {
+        console.log(`Reviews from reviews object store + tempReviews objectStore: ${allReviews}`);
+        if (callback) callback(null, allReviews);
+        return allReviews;
       } else {
         console.log('Displaying reviews from server');
         DBHelper.populateReviews(callback, id);
