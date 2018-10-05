@@ -130,18 +130,28 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
     }
   }, self.restaurant.id);
 
-  DBHelper.getReviews()
-  .then(objectStores => {
-    let allReviews = [];
-    objectStores.forEach(store => {
-      store.forEach(review => {
-        allReviews.push(review);
-      });
-    });
+  // DBHelper.getReviews()
+  // .then(objectStores => {
+  //   let allReviews = [];
+  //   objectStores.forEach(store => {
+  //     store.forEach(review => {
+  //       allReviews.push(review);
+  //     });
+  //   });
+  //
+  //   console.log(`Reviews from reviews object store + tempReviews objectStore: ${allReviews}`);
+  //   fillReviewsHTML(allReviews);
+  // }).catch(allReviewsError => console.log('Failed to get reviews from both object stores with error', allReviewsError));
 
-    console.log(`Reviews from reviews object store + tempReviews objectStore: ${allReviews}`);
-    fillReviewsHTML(allReviews);
-  }).catch(allReviewsError => console.log('Failed to get reviews from both object stores with error', allReviewsError));
+  self.reviews = DBHelper.routeReviews((error, results) => {
+    if (error) {
+      console.log("Error getting reviews from routeReviews(): ", error);
+    } else {
+      console.log("Reviews result from routeReviews(): ", results);
+      fillReviewsHTML(results);
+      return results;
+    }
+  }, restaurantID);
 }
 
 /**
