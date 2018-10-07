@@ -351,6 +351,54 @@ export default class DBHelper {
   }
 
   /**
+   * Post temporary reviews to the server when online
+   */
+  static postTempReviews() {
+    DBHelper.pingServer(DBHelper.REVIEWS_URL)
+    .then(isOnline => {
+      if (isOnline) {
+        const dbPromise = DBHelper.openDatabase();
+
+        return dbPromise.then(function(db) {
+          const tx = db.transaction('tempReviews', 'readonly');
+          const tempReviewsStore = tx.objectStore('tempReviews');
+          return tempReviewsStore.getAll()
+
+          .then(reviews => {
+            console.log('Got reviews from tempReviews: ', reviews);
+
+            const init = {
+              method: 'POST',
+              headers: {
+                "Content-Type": "application/json;charset=utf-8"
+              },
+              body: JSON.stringify(reviews)
+            };
+
+            console.log(`POST URL for postTempReviews: ${DBHelper.REVIEWS_URL}`);
+            return fetch(`${DBHelper.REVIEWS_URL}`, init)
+            .then(serverResponse => {
+              console.log(`Temp reviews submitted successfully! ${serverResponse}`);
+              return serverResponse;
+            }).then(() => {
+              return dbPromise.then(db => {
+                const tx = db.transaction('tempReviews', 'readwrite');
+                tx.objectStore('tempReviews').clear();
+                return tx.complete;
+              });
+            }).catch(serverError => console.error(`Error posting temp reviews to server with error ${serverError}`));
+          }).catch(dbError => console.error(`Error getting temp reviews from tempReviews object store`));
+        });
+      } else {
+        console.log(`The server appears to be offline. Your reviews will be submitted when it comes back online.`);
+        return;
+      }
+    }).catch(pingError => {
+      console.log(`The server appears to be offline. Your reviews will be submitted when it comes back online.`);
+    });
+  }
+
+  /**
    *  Fetches a restaurant by its ID.
    */
   static fetchRestaurantById(id, callback) {
