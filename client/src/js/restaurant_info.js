@@ -62,6 +62,40 @@ const fetchRestaurantFromURL = (callback) => {
       }
       fillRestaurantHTML();
       callback(null, restaurant);
+
+      // load and subset reviews into IDB
+      let params = (new URL(window.location)).searchParams;
+      console.log(`params: ${params}`);
+      let restaurantID = parseInt(params.get('id'));
+      console.log(`restaurantID: ${restaurantID}`);
+
+      DBHelper.populateReviews((error, results) => {
+        if (error) {
+          console.log("Error populating reviews in populateReviews(): ", error);
+        } else {
+          console.log("Reviews result from populateReviews(): ", results);
+          // save reviews in IDB to global scope, so they're available to other functions (thanks to Doug Brown for this)
+          self.reviews = results;
+          // fill reviews from global scope (thanks to Doug Brown for this)
+          fillReviewsHTML();
+        }
+      }, self.restaurant.id);
+
+      // fill reviews from all IDB object stores if present; from server if not
+      self.reviews = DBHelper.routeReviews((error, results) => {
+        if (error) {
+          console.log("Error getting reviews from routeReviews(): ", error);
+        } else {
+          console.log("Reviews result from routeReviews(): ", results);
+          results = results.filter(r => r.restaurant_id == restaurantID);
+          // TODO: Possibly delete non-subsetted reviews at this point?
+          // save reviews returned from routeReviews() to global scope, so they're available to other functions (thanks to Doug Brown for this)
+          self.reviews = results;
+          // fill reviews from global scope (thanks to Doug Brown for this)
+          fillReviewsHTML();
+          return results;
+        }
+      }, restaurantID);
     });
   }
 }
@@ -111,46 +145,6 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
-  // fill reviews
-  let params = (new URL(window.location)).searchParams;
-  console.log(`params: ${params}`);
-  let restaurantID = parseInt(params.get('id'));
-  console.log(`restaurantID: ${restaurantID}`);
-
-  DBHelper.populateReviews((error, results) => {
-    if (error) {
-      console.log("Error populating reviews in populateReviews(): ", error);
-    } else {
-      console.log("Reviews result from populateReviews(): ", results);
-      // fillReviewsHTML(results);
-    }
-  }, self.restaurant.id);
-
-  // DBHelper.getReviews()
-  // .then(objectStores => {
-  //   let allReviews = [];
-  //   objectStores.forEach(store => {
-  //     store.forEach(review => {
-  //       allReviews.push(review);
-  //     });
-  //   });
-  //
-  //   console.log(`Reviews from reviews object store + tempReviews objectStore: ${allReviews}`);
-  //   fillReviewsHTML(allReviews);
-  // }).catch(allReviewsError => console.log('Failed to get reviews from both object stores with error', allReviewsError));
-
-  self.reviews = DBHelper.routeReviews((error, results) => {
-    if (error) {
-      console.log("Error getting reviews from routeReviews(): ", error);
-    } else {
-      console.log("Reviews result from routeReviews(): ", results);
-      results = results.filter(r => r.restaurant_id == restaurantID);
-      // TODO: Possibly delete non-subsetted reviews at this point?
-      // TODO: Move filtering function higher up, so that filtering occurs before UI filling?
-      fillReviewsHTML(results);
-      return results;
-    }
-  }, restaurantID);
 }
 
 /**
