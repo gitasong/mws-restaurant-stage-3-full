@@ -172,6 +172,10 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
  */
 const fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
+  // clear reviews-list each time UI is rendered (thanks to Doug Brown for this hack)
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
   const header = document.createElement('div');
   header.setAttribute('id', 'reviews-header');
   const titleSpan = document.createElement('span');
