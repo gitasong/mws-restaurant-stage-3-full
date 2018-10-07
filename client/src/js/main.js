@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
   fetchNeighborhoods();
   fetchCuisines();
+  // Post any temporary reviews to server, if online
+  DBHelper.postTempReviews();
 });
 
 /**
