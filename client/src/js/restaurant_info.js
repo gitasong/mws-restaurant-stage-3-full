@@ -73,10 +73,6 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name + '  ';
 
-  // const iconSwap = document.createElement('span');
-  // iconSwap.className = 'icon-swap';
-  // name.append(iconSwap);
-
   const favorite = document.createElement('i');
   let isSolid = restaurant.is_favorite;
   console.log(`isSolid for ${restaurant.name}, id ${restaurant.id}: ${restaurant.is_favorite}`);
