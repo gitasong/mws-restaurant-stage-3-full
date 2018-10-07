@@ -193,7 +193,8 @@ const fillReviewsHTML = (reviews = self.reviews) => {
     container.appendChild(noReviews);
     return;
   }
-  const ul = document.getElementById('reviews-list');
+  const ul = document.createElement('ul');
+  ul.setAttribute('id', 'reviews-list')
   reviews.forEach(review => {
     ul.appendChild(createReviewHTML(review));
   });
