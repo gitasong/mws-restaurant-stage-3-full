@@ -344,7 +344,7 @@ export default class DBHelper {
         .catch((databaseError) => {
           console.log(`Failed to save review ${review} to database with error ${databaseError}`);
 
-          console.log('Server connection has been lost. Your review will be submitted when the server comes online.');
+          alert('The server appears to be offline. Your review will be submitted when the server comes online.');
         }
       )};
     }).catch(pingError => console.log('Failed to ping server with error', pingError));
