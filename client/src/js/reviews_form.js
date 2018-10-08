@@ -5,14 +5,14 @@ import DBHelper from './dbhelper.js';
 
 let restaurant;
 let reviews;
+// grab restaurant ID from query string params
+let params = (new URL(window.location)).searchParams;
+let restaurantID = params.get('id');
+console.log(`restaurantID for form: ${restaurantID}`);
 
 window.submitFormData = (event) => {
   event.preventDefault();
   console.log('submitting form data...');
-
-  // grab restaurant ID from query string params
-  let params = (new URL(window.location)).searchParams;
-  let restaurantID = params.get('id');
 
   // grab form data
   let reviewUsername = document.querySelector('#review-username').value;
