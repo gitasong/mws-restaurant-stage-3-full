@@ -536,10 +536,37 @@ footer {
 }
 
 #reviews-form input, #reviews-form textarea {
-  border-top: 0;
-  border-bottom: 2px solid #cc2900;
-  border-left: 0;
-  border-right: 0;
+  /* Thanks to this CodePen for this Material Design hack: https://codepen.io/lehollandaisvolant/pen/aNQNjx */
+  /* 2 imgs : 2px gray line (normal state) AND 2px red line (focus state) */
+  display: block;
+	width: 100%;
+  border: 0;
+  outline: none;
+  background: #fff no-repeat;
+	background-image: linear-gradient(to bottom, #cc2900, #cc2900), linear-gradient(to bottom, #999, #999);
+	/* sizes for the 2 images (default state) */
+	background-size: 0 2px, 100% 2px;
+	/* positions for the 2 images. Change both "50%" to "0%" or "100%" and tri again */
+	background-position: 50% 100%, 50% 100%;
+
+	/* animation solely on background-size */
+  transition: background-size 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #666;
+}
+
+#reviews-form input:focus, #reviews-form textarea:focus {
+  /* Thanks to this CodePen for this Material Design hack: https://codepen.io/lehollandaisvolant/pen/aNQNjx */
+  /* sizes for the 2 images (focus state) */
+	background-size: 100% 2px, 100% 1px;
+  outline: none;
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+09
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+}
+
 }
 
 #reviews-form input, #reviews-form select {
