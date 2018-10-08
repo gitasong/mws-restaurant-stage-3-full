@@ -548,12 +548,32 @@ footer {
 
 #reviews-form button {
   display: inline-block;
-	background-color: #e32d00;
-	color: #fff;
+  width: 10rem;
   font-size: 1.2rem;
   line-height: 1.5;
 	margin: 1.5rem 0 0 0;
 	padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+#reviews-form button#submit-button {
+  background-color: #e32d00;
+	color: #fff;
+}
+
+#reviews-form button#back-button {
+  background-color: #fff;
+	color: #e32d00;
+  border: 2px solid #e32d00;
+}
+
+#reviews-form button#submit-button:hover {
+  background-color: #cc2900;
+	color: #fff;
+}
+
+#reviews-form button#back-button:hover {
+  background-color: #e32d00;
+	color: #fff;
 }
 
 
