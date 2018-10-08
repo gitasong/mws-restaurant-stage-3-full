@@ -485,9 +485,6 @@ footer {
 	flex-wrap: nowrap;
 	justify-content: center;
 	background-color: #fff;
-	border: 2px solid #f3f3f3;
-	border-radius: 40px 0 40px 0;
-	margin: 0 0 2rem 0;
 	padding: 0 0 2rem 0;
 	overflow: hidden;
   width: 100%;
@@ -500,7 +497,7 @@ footer {
 	justify-content: space-between;
 	align-items: baseline;
 	background-color: #cc2900;
-	padding: 1rem 2rem 0.6rem 2rem;
+	padding: .75rem 2rem 0.4rem 2rem;
 }
 
 .reviews-form-header p {
@@ -518,21 +515,26 @@ footer {
 	margin: 0 0 2rem 0;
 	padding: 0 0 1rem 0;
 	overflow: hidden;
-  /* width: 100%; */
 }
 
 .reviews-form-inner-container {
+  max-width: 100%;
   margin: 1rem 2rem 0 2rem;
-	/* padding: 0.5rem 0.5rem 0.5rem 0.5rem; */
+}
+
+form {
+  max-width: 100%;
 }
 
 #reviews-form .form-group {
   display: flex;
   flex-direction: column;
+  margin-top: 0.5rem;
 }
 
 #reviews-form label {
   margin-top: 1.5rem;
+  font-size: 1rem;
 }
 
 #reviews-form input, #reviews-form textarea {
@@ -567,6 +569,9 @@ footer {
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
 
+#reviews-form select {
+  font-size: 0.95rem;
+  color: #777;
 }
 
 #reviews-form input, #reviews-form select {
@@ -575,16 +580,17 @@ footer {
 
 #reviews-form button {
   display: inline-block;
-  width: 10rem;
-  font-size: 1.2rem;
+  width: 8rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-	margin: 1.5rem 0 0 0;
+	margin: 2rem 0 0 0;
 	padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 #reviews-form button#submit-button {
   background-color: #e32d00;
 	color: #fff;
+  border: 2px solid #e32d00;
 }
 
 #reviews-form button#back-button {
@@ -596,6 +602,7 @@ footer {
 #reviews-form button#submit-button:hover {
   background-color: #cc2900;
 	color: #fff;
+  border: 2px solid #cc2900;
 }
 
 #reviews-form button#back-button:hover {
@@ -646,6 +653,31 @@ footer {
   .review-name {
     font-size: 1.6rem;
   }
+
+  .reviews-form-header p {
+  	font-size: 2rem;  /* 16pt */
+  }
+
+  #reviews-form .form-group {
+    margin-top: 1rem;
+  }
+
+  #reviews-form label {
+    font-size: 1.2rem;
+  }
+
+  #reviews-form input, #reviews-form textarea {
+    font-size: 1.1rem;
+  }
+
+  #reviews-form select {
+    font-size: 1.05rem;
+  }
+
+  #reviews-form button {
+    width: 10rem;
+    font-size: 1.2rem;
+  }
 }
 
 @media screen and (min-width: 600px) and (max-width:899px) {
@@ -662,6 +694,12 @@ footer {
 		width: 37.5%;
 		margin-right: 0;
 	}
+
+  .reviews-form-header p, form {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media screen and (min-width: 900px) and (max-width: 1199px) {
@@ -686,11 +724,17 @@ footer {
 		margin-right: 10%;
 	}
 
-	#restaurant-container, #reviews-container {
+	#restaurant-container, #reviews-container, .reviews-form-inner-container {
 		max-width: 800px;
 		margin-left: auto;
 		margin-right: auto;
 	}
+
+  .reviews-form-header p, form {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -711,9 +755,15 @@ footer {
 		margin-right: 5%;
 	}
 
-	#restaurant-container, #reviews-container {
+	#restaurant-container, #reviews-container, .reviews-form-inner-container {
 		max-width: 800px;
 		margin-left: auto;
 		margin-right: auto;
 	}
+
+  .reviews-form-header p, form {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
