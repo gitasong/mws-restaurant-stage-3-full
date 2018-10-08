@@ -3,12 +3,34 @@
 require('./swRegistration.js');
 import DBHelper from './dbhelper.js';
 
-let restaurant;
-let reviews;
 // grab restaurant ID from query string params
 let params = (new URL(window.location)).searchParams;
 let restaurantID = params.get('id');
 console.log(`restaurantID for form: ${restaurantID}`);
+
+// get restaurant data
+let restaurants = DBHelper.getRestaurants();
+restaurants.then(theseRestaurants => {
+  console.log(`restaurantID inside .then(): ${restaurantID}`);
+  console.log(`Restaurants for form: ${theseRestaurants}`);
+
+  // filter restaurant data for restaurant matching id parameter
+  let restaurant = theseRestaurants.filter(r => {
+    console.log(`r.id: ${r.id}`);
+    console.log(`restaurant for form: ${r.name}`);
+    return r.id == restaurantID;
+  });
+
+  // set global restaurant object equal to return value of filter function
+  self.restaurant = restaurant[0];
+  console.log(`Restaurant for this form: ${self.restaurant.name}`);
+  console.log(`self.restaurant: ${self.restaurant.name}`);
+
+  // fill in form header with restaurant name
+  let restaurantName = document.querySelector('#form-restaurant-name');
+  restaurantName.innerHTML = self.restaurant.name;
+}).catch(err => console.error(err));
+
 
 window.submitFormData = (event) => {
   event.preventDefault();
