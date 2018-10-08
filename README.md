@@ -27,7 +27,7 @@ For the **Restaurant Reviews** projects, we are incrementally converting a stati
 - [Sails.js](http://sailsjs.com/). Install globally before starting with `npm i sails -g`.
 
 ### Installation
-1. Clone the [repo](https://github.com/gitasong/mws-restaurant-stage-2-full).
+1. Clone the [repo](https://github.com/gitasong/mws-restaurant-stage-3-full).
 2. In Terminal, navigate to the `server` directory and install the server dependencies with `npm install`.
 3. Open a new Terminal window and spin up the sails (data) server with `node server`.
 4. Still in Terminal, migrate back to the root project directory and install the project dependencies with `npm install`.
