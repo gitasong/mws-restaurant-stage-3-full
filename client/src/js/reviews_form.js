@@ -31,6 +31,12 @@ restaurants.then(theseRestaurants => {
   restaurantName.innerHTML = self.restaurant.name;
 }).catch(err => console.error(err));
 
+window.goBack = (event) => {
+  // redirect to restaurant page
+  console.log(`Redirecting to: ./restaurant.html?id=${restaurantID}`);
+  window.location.replace(`./restaurant.html?id=${restaurantID}`);
+}
+
 
 window.submitFormData = (event) => {
   event.preventDefault();
