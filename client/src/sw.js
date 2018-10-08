@@ -41,16 +41,16 @@ self.addEventListener('install', (event) => {
 });
 
 // Activate service worker, clear old caches
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      Promise.all(
-        cacheNames.filter((cacheName) => cacheName.startsWith('restaurants-') && cacheName != staticCacheName)
-        .map((cacheName) => caches.delete(cacheName))
-      );
-    })
-  );
-});
+// self.addEventListener('activate', (event) => {
+//   event.waitUntil(
+//     caches.keys().then((cacheNames) => {
+//       Promise.all(
+//         cacheNames.filter((cacheName) => cacheName.startsWith('restaurants-') && cacheName != staticCacheName)
+//         .map((cacheName) => caches.delete(cacheName))
+//       );
+//     })
+//   );
+// });
 
 // Fetch assets from cache if offline, from network otherwise
 // Route requests by origin
