@@ -400,6 +400,56 @@ export default class DBHelper {
   }
 
   /**
+   * Push offline favorites to the server when online
+   */
+  static pushFavorites() {
+    DBHelper.pingServer(DBHelper.RESTAURANTS_URL)
+    .then(isOnline => {
+      if (isOnline) {
+        const dbPromise = DBHelper.openDatabase();
+
+        return dbPromise.then(db => {
+          const tx = db.transaction('restaurants', 'readonly');
+          const restaurantStore = tx.objectStore('restaurants');
+          return restaurantStore.getAll()
+
+          .then(restaurants => {
+            console.log(`Restaurants from pushFavorites getAll(): ${restaurants}`);
+
+            let updatedRestaurants = restaurants.filter(r => {
+              console.log(`restaurant id: ${r.id} updated at: ${r.updatedAt} created at: ${r.createdAt}`);
+              return r.updatedAt > r.createdAt;
+            });
+
+            console.log(`updatedRestaurants: ${updatedRestaurants}`);
+
+            updatedRestaurants.forEach(restaurant => {
+              const init = {
+                method: 'PUT',
+                headers: {
+                  "Content-Type": "application/json;charset=utf-8"
+                },
+                body: JSON.stringify(restaurant)
+              };
+
+              return fetch(`${DBHelper.RESTAURANTS_URL}/${restaurant.id}`, init)
+              .then(serverResponse => {
+                if (serverResponse.ok) {
+                  console.log(`Offline favorites pushed successfully!`);
+                } else {
+                  console.log(`Failed to push offline favorites to server with error ${serverResponse}`);
+                }
+              }).catch(serverError => console.log(`Failed to PUT offline favorites with error ${serverError}`));
+            });
+          }).catch(dbError => console.log(`Failed to getAll() updated restaurants from restaurants object store with error ${dbError}`));
+        }).catch(dbOpenError => console.log(`Failed to open database within pushFavorites() with error ${dbOpenError}`));
+      } else {
+        console.log(`The server appears to be offline. Offline favorites will be submitted when the server comes back online.`);
+      }
+    }).catch(pingError => console.log(`Error pinging server within pushFavorites() with error ${pingError}`));
+  }
+
+  /**
    *  Fetches a restaurant by its ID.
    */
   static fetchRestaurantById(id, callback) {
