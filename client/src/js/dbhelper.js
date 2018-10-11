@@ -274,6 +274,7 @@ export default class DBHelper {
       const restaurantStore = tx.objectStore('restaurants');
 
       restaurant.is_favorite = isFavorite;
+      restaurant.updatedAt = Date.now();
 
       restaurantStore.put(restaurant);
 
