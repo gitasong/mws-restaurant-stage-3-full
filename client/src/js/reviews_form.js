@@ -55,7 +55,7 @@ window.submitFormData = (event) => {
     "rating": reviewRating,
     "comments": reviewText,
     "createdAt": Date.now(),
-    "modifiedAt": Date.now()
+    "updatedAt": Date.now()
   };
   console.log(formData);
 
