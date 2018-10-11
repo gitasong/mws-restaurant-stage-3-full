@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   self.initMap();
   // Post any temporary reviews to server, if online
   DBHelper.postTempReviews();
+  DBHelper.pushFavorites();
 });
 
 /**

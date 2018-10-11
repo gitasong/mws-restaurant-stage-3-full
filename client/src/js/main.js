@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchCuisines();
   // Post any temporary reviews to server, if online
   DBHelper.postTempReviews();
+  DBHelper.pushFavorites();
 });
 
 /**
