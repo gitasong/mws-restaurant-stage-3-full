@@ -366,6 +366,7 @@ export default class DBHelper {
       if (isOnline) {
         const dbPromise = DBHelper.openDatabase();
 
+        // post temporary reviews to server
         return dbPromise.then(function(db) {
           const tx = db.transaction('tempReviews', 'readonly');
           const tempReviewsStore = tx.objectStore('tempReviews');
@@ -388,6 +389,7 @@ export default class DBHelper {
               console.log(`Temp reviews submitted successfully! ${serverResponse}`);
               return serverResponse;
             }).then(() => {
+              // clear tempReviews object store
               return dbPromise.then(db => {
                 const tx = db.transaction('tempReviews', 'readwrite');
                 tx.objectStore('tempReviews').clear();
