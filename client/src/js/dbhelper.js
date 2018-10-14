@@ -287,7 +287,13 @@ export default class DBHelper {
     const isOnline = DBHelper.pingServer(DBHelper.RESTAURANTS_URL);
     // if server online, PUT favorite
     if (isOnline) {
-      const init = { method: 'PUT' };
+      const init = {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(restaurant)
+      };
       console.log(`PUT URL: ${DBHelper.RESTAURANTS_URL}/${restaurant.id}/?is_favorite=${isFavorite}`);
       return fetch(`${DBHelper.RESTAURANTS_URL}/${restaurant.id}/?is_favorite=${isFavorite}`, init).then(serverResponse => serverResponse.json())
       .then(serverResponseJSON => {
