@@ -186,13 +186,13 @@ const createRestaurantHTML = (restaurant) => {
   let isSolid = restaurant.is_favorite;
   console.log(`isSolid for ${restaurant.name}, id ${restaurant.id}: ${restaurant.is_favorite}`);
   // console.log(typeof(restaurant.is_favorite));
-  isSolid ? favorite.className = 'fas fa-heart' : favorite.className = 'far fa-heart';
-  isSolid ? favorite.setAttribute('aria-label', 'Favorited!') : favorite.setAttribute('aria-label', 'Favorite Me!');
+  isSolid == true ? favorite.className = 'fas fa-heart' : favorite.className = 'far fa-heart';
+  isSolid == true ? favorite.setAttribute('aria-label', 'Favorited!') : favorite.setAttribute('aria-label', 'Favorite Me!');
   favorite.setAttribute('data-id', restaurant.id);
   iconContainer.append(favorite);
 
   favorite.addEventListener('click', function() {
-    if (!isSolid) {
+    if (isSolid == false) {  // TODO: check for false and 'false'
       favorite.className = 'fas fa-heart';
       favorite.setAttribute('aria-label', 'Favorited!');
       isSolid = true;
