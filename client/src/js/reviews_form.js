@@ -5,7 +5,7 @@ import DBHelper from './dbhelper.js';
 
 // grab restaurant ID from query string params
 let params = (new URL(window.location)).searchParams;
-let restaurantID = params.get('id');
+let restaurantID = parseInt(params.get('id'));
 console.log(`restaurantID for form: ${restaurantID}`);
 
 // get restaurant data
