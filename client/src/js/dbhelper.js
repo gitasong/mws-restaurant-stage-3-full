@@ -424,6 +424,15 @@ export default class DBHelper {
 
             let updatedRestaurants = restaurants.filter(r => {
               console.log(`restaurant id: ${r.id} updated at: ${r.updatedAt} created at: ${r.createdAt}`);
+
+              // check createdAt date format; if ISO string, convert to milliseconds and return all restaurants where updatedAt > createdAt
+              if (typeof r.updatedAt === 'string') {
+                const updatedAtISO = new Date(r.updatedAt);
+                const updatedAtMilliseconds = updatedAtISO.getTime();
+                return updatedAtMilliseconds > r.createdAt;
+              }
+
+              // if createdAt date in milliseconds, return restaurants where updatedAt > createdAt
               return r.updatedAt > r.createdAt;
             });
 
