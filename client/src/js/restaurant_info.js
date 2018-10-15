@@ -11,9 +11,11 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
  * Initialize map as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', event => {
+  // Initialize map
   self.initMap();
   // Post any temporary reviews to server, if online
   DBHelper.postTempReviews();
+  // Push any offline favorites to server, if online
   DBHelper.pushFavorites();
 });
 

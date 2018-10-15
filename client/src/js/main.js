@@ -13,6 +13,7 @@ let markers = [];
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', event => {
+  // Initialize map
   self.initMap(); // added
   // Fetch restaurants from server and populate database
   DBHelper.routeRestaurants((error, restaurants) => {
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', event => {
   fetchCuisines();
   // Post any temporary reviews to server, if online
   DBHelper.postTempReviews();
+  // Push any offline favorites to server, if online
   DBHelper.pushFavorites();
 });
 
