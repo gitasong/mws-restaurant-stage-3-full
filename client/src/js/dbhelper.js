@@ -32,7 +32,7 @@ export default class DBHelper {
     const status = fetch(server).then(response => {
       if (response.ok) { return true; }
     }).catch(error => {
-      console.error('Error while pinging server: ', error);
+      console.log('Error while pinging server: ', error);
       return false;
     });
     return status;
@@ -42,7 +42,7 @@ export default class DBHelper {
    * Opens and creates database
   */
   static openDatabase() {
-    return idb.open('restaurants', 3, function(upgradeDB) {
+    return idb.open('restaurants', 3, upgradeDB => {
       switch(upgradeDB.oldVersion) {
         case 0:
           // placeholder
@@ -70,7 +70,7 @@ export default class DBHelper {
    */
   static routeRestaurants(callback) {
     DBHelper.getRestaurants()
-    .then((restaurants) => {
+    .then(restaurants => {
       if (restaurants.length) {
         console.log('Displaying restaurants from database', restaurants);
         if (callback) callback(null, restaurants);
@@ -119,7 +119,7 @@ export default class DBHelper {
         const restaurants = data;
         console.log('Restaurants from server: ', restaurants);
         callback(null, restaurants);
-      }).catch((error) => {
+      }).catch(error => {
         callback(error, null);
       });
     })
@@ -138,7 +138,7 @@ export default class DBHelper {
         const reviews = data;
         console.log('Reviews from server: ', reviews);
         callback(null, reviews);
-      }).catch((error) => {
+      }).catch(error => {
         callback(error, null);
       });
     })
@@ -151,24 +151,24 @@ export default class DBHelper {
     console.log('Opening database within populateRestaurants()');
     const dbPromise = DBHelper.openDatabase();
 
-    dbPromise.then(function(db) {
+    dbPromise.then(db => {
       DBHelper.serveRestaurants((error, restaurants) => {
         const tx = db.transaction('restaurants', 'readwrite');
         const restaurantStore = tx.objectStore('restaurants');
 
         return Promise.all(
-          restaurants.map(function(restaurant) {
+          restaurants.map(restaurant => {
             console.log('Adding restaurant: ', restaurant);
             return restaurantStore.put(restaurant);
           }
-        )).then(function(result) {
+        )).then(result => {
           console.log('Result from populateRestaurants: ', result);
           callback(null, restaurants);
         })
-        .then(function() {
+        .then(() => {
           console.log('All restaurants added to database successfully!');
         })
-        .catch(function(error) {
+        .catch(error => {
           tx.abort();
           console.log(error);
         });
@@ -183,24 +183,24 @@ export default class DBHelper {
     console.log('Opening database within populateReviews()');
     const dbPromise = DBHelper.openDatabase();
 
-    dbPromise.then(function(db) {
+    dbPromise.then(db => {
       DBHelper.serveReviews((error, reviews) => {
         const tx = db.transaction('reviews', 'readwrite');
         const reviewStore = tx.objectStore('reviews');
 
         return Promise.all(
-          reviews.map(function(review) {
+          reviews.map(review => {
             console.log('Adding review: ', review);
             return reviewStore.put(review);
           }
-        )).then(function(result) {
+        )).then(result => {
           console.log('Result from populateReviews: ', result);
           callback(null, reviews);
         })
-        .then(function() {
+        .then(() => {
           console.log('All reviews added successfully!');
         })
-        .catch(function(error) {
+        .catch(error => {
           tx.abort();
           console.log(error);
         });
@@ -214,7 +214,7 @@ export default class DBHelper {
   static getRestaurants() {
     const dbPromise = DBHelper.openDatabase();
 
-    return dbPromise.then(function(db) {
+    return dbPromise.then(db => {
       const tx = db.transaction('restaurants', 'readonly');
       const restaurantStore = tx.objectStore('restaurants');
       return restaurantStore.getAll()
@@ -222,7 +222,7 @@ export default class DBHelper {
         console.log('Got restaurants from database: ', restaurants);
         return restaurants;
       });
-    }).catch((error) => console.error('Error fetching restaurants from database', error));
+    }).catch(error => console.log('Error fetching restaurants from database', error));
   }
 
   /**
@@ -231,7 +231,7 @@ export default class DBHelper {
   static getReviews() {
     const dbPromise = DBHelper.openDatabase();
 
-    const savedReviews = dbPromise.then(function(db) {
+    const savedReviews = dbPromise.then(db => {
       const tx = db.transaction('reviews', 'readonly');
       const reviewStore = tx.objectStore('reviews');
       return reviewStore.getAll()
@@ -240,11 +240,11 @@ export default class DBHelper {
         return reviews;
       });
     }).catch(reviewsError => {
-      console.error('Error fetching reviews from reviews object store', reviewsError);
+      console.log('Error fetching reviews from reviews object store', reviewsError);
       return [];
     });
 
-    const tempReviews = dbPromise.then(function(db) {
+    const tempReviews = dbPromise.then(db => {
       const tx = db.transaction('tempReviews', 'readonly');
       const tempReviewStore = tx.objectStore('tempReviews');
       return tempReviewStore.getAll()
@@ -253,7 +253,7 @@ export default class DBHelper {
         return tempReviews;
       });
     }).catch(tempReviewsError => {
-      console.error('Error fetching reviews from tempReviews object store', tempReviewsError)
+      console.log('Error fetching reviews from tempReviews object store', tempReviewsError)
       return [];
     });
 
@@ -269,7 +269,7 @@ export default class DBHelper {
     // add favorite to IDB
     const dbPromise = DBHelper.openDatabase();
 
-    dbPromise.then(function(db) {
+    dbPromise.then(db => {
       const tx = db.transaction('restaurants', 'readwrite');
       const restaurantStore = tx.objectStore('restaurants');
 
@@ -281,7 +281,7 @@ export default class DBHelper {
       return tx.complete;
     })
     .then(() => console.log(`Favorited ${restaurant.name}, id ${restaurant.id}`))
-    .catch((databaseError) => console.log(`Failed to favorite ${restaurant.name}, id ${restaurant.id} with error ${databaseError}`));
+    .catch(databaseError => console.log(`Failed to favorite ${restaurant.name}, id ${restaurant.id} with error ${databaseError}`));
 
     // checks if server online
     const isOnline = DBHelper.pingServer(DBHelper.RESTAURANTS_URL);
@@ -299,7 +299,7 @@ export default class DBHelper {
       .then(serverResponseJSON => {
         console.log(`Response from postFavorite: ${serverResponseJSON}`);
         return serverResponseJSON;
-      }).catch((serverError) => console.log(`Failed to post favorite with error: ${serverError}`));
+      }).catch(serverError => console.log(`Failed to post favorite with error: ${serverError}`));
     }
     else {
       // if server offline, notify user and post when online
@@ -337,7 +337,7 @@ export default class DBHelper {
         console.log('Opening tempReviews database within postReview()');
         const dbPromise = DBHelper.openDatabase();
 
-        dbPromise.then(function(db) {
+        dbPromise.then(db => {
           const tx = db.transaction('tempReviews', 'readwrite');
           const tempReviewsStore = tx.objectStore('tempReviews');
 
@@ -347,8 +347,8 @@ export default class DBHelper {
 
           console.log('tx.complete:', tx.complete);
           return tx.complete;
-        }).then((review) => console.log(`Saved review ${review} to tempReviews`))
-        .catch((databaseError) => {
+        }).then(review => console.log(`Saved review ${review} to tempReviews`))
+        .catch(databaseError => {
           console.log(`Failed to save review ${review} to database with error ${databaseError}`);
 
           alert('The server appears to be offline. Your review will be submitted when the server comes online.');
@@ -367,7 +367,7 @@ export default class DBHelper {
         const dbPromise = DBHelper.openDatabase();
 
         // post temporary reviews to server
-        return dbPromise.then(function(db) {
+        return dbPromise.then(db => {
           const tx = db.transaction('tempReviews', 'readonly');
           const tempReviewsStore = tx.objectStore('tempReviews');
           return tempReviewsStore.getAll()
@@ -395,8 +395,8 @@ export default class DBHelper {
                 tx.objectStore('tempReviews').clear();
                 return tx.complete;
               });
-            }).catch(serverError => console.error(`Error posting temp reviews to server with error ${serverError}`));
-          }).catch(dbError => console.error(`Error getting temp reviews from tempReviews object store`));
+            }).catch(serverError => console.log(`Error posting temp reviews to server with error ${serverError}`));
+          }).catch(dbError => console.log(`Error getting temp reviews from tempReviews object store`));
         });
       } else {
         console.log(`The server appears to be offline. Your reviews will be submitted when it comes back online.`);
@@ -609,15 +609,5 @@ export default class DBHelper {
       marker.addTo(newMap);
     return marker;
   }
-  /* static mapMarkerForRestaurant(restaurant, map) {
-    const marker = new google.maps.Marker({
-      position: restaurant.latlng,
-      title: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant),
-      map: map,
-      animation: google.maps.Animation.DROP}
-    );
-    return marker;
-  } */
 
 }
