@@ -10,7 +10,7 @@ var newMap;  // I'm leaving this variable declared with var, per the original co
 /**
  * Initialize map as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', event => {
   self.initMap();
   // Post any temporary reviews to server, if online
   DBHelper.postTempReviews();
@@ -47,7 +47,7 @@ self.initMap = () => {  // initMap() and its methods and properties need to be c
 /**
  * Get current restaurant from page URL.
  */
-const fetchRestaurantFromURL = (callback) => {
+const fetchRestaurantFromURL = callback => {
   if (self.restaurant) { // restaurant already fetched!
     callback(null, self.restaurant)
     return;
@@ -119,7 +119,7 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   favorite.setAttribute('data-id', restaurant.id);
   name.append(favorite);
 
-  favorite.addEventListener('click', function() {
+  favorite.addEventListener('click', () => {
     if (isSolid == false) {
       favorite.className = 'fas fa-heart';
       favorite.setAttribute('aria-label', 'Favorited!');
@@ -211,7 +211,7 @@ const fillReviewsHTML = (reviews = self.reviews) => {
 /**
  * Create review HTML and add it to the webpage.
  */
-const createReviewHTML = (review) => {
+const createReviewHTML = review => {
   const li = document.createElement('li');
   li.className = 'review';
 

@@ -12,7 +12,7 @@ let markers = [];
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', event => {
   self.initMap(); // added
   // Fetch restaurants from server and populate database
   DBHelper.routeRestaurants((error, restaurants) => {
@@ -131,7 +131,7 @@ self.updateRestaurants = () => {
 /**
  * Clear current restaurants, their HTML and remove their map markers.
  */
-const resetRestaurants = (restaurants) => {
+const resetRestaurants = restaurants => {
   // Remove all restaurants
   self.restaurants = [];
   const ul = document.getElementById('restaurants-list');
@@ -159,7 +159,7 @@ const fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create restaurant HTML.
  */
-const createRestaurantHTML = (restaurant) => {
+const createRestaurantHTML = restaurant => {
   const li = document.createElement('li');
 
   const imageContainer = document.createElement('div');
@@ -191,7 +191,7 @@ const createRestaurantHTML = (restaurant) => {
   favorite.setAttribute('data-id', restaurant.id);
   iconContainer.append(favorite);
 
-  favorite.addEventListener('click', function() {
+  favorite.addEventListener('click', () => {
     if (isSolid == false) {  // TODO: check for false and 'false'
       favorite.className = 'fas fa-heart';
       favorite.setAttribute('aria-label', 'Favorited!');
@@ -222,7 +222,7 @@ const createRestaurantHTML = (restaurant) => {
   li.append(imageContainer);
   li.append(infoContainer);
 
-  return li
+  return li;
 }
 
 /**
