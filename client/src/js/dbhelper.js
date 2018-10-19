@@ -375,6 +375,9 @@ export default class DBHelper {
           .then(reviews => {
             console.log('Got reviews from tempReviews: ', reviews);
 
+            reviews.map(review => delete review.id); // deletes ID from each review, to avoid ID conflicts on the server
+            console.log(`Reviews after deleting IDs: ${reviews}`);
+
             const init = {
               method: 'POST',
               headers: {
