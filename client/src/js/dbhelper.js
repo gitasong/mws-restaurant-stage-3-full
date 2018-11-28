@@ -211,18 +211,21 @@ export default class DBHelper {
   /**
    * Get restaurants from database
    */
-  static getRestaurants() {
-    const dbPromise = DBHelper.openDatabase();
+  static async getRestaurants() {
+    try {
+      const db =  await DBHelper.openDatabase();
 
-    return dbPromise.then(db => {
+      // return db.then(db => {
       const tx = db.transaction('restaurants', 'readonly');
       const restaurantStore = tx.objectStore('restaurants');
-      return restaurantStore.getAll()
-      .then(restaurants => {
-        console.log('Got restaurants from database: ', restaurants);
-        return restaurants;
-      });
-    }).catch(error => console.log('Error fetching restaurants from database', error));
+      const restaurants = await restaurantStore.getAll();
+      console.log('Got restaurants from database: ', restaurants);
+      return restaurants;
+      // });
+    }
+    catch(error) {
+      console.log('Error fetching restaurants from database', error);
+    }
   }
 
   /**
