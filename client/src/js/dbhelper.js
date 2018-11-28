@@ -68,9 +68,8 @@ export default class DBHelper {
   /**
    * Fetch restaurants from database if present; from server otherwise
    */
-  static routeRestaurants(callback) {
-    DBHelper.getRestaurants()
-    .then(restaurants => {
+  static async routeRestaurants(callback) {
+    const restaurants = DBHelper.getRestaurants();
       if (restaurants.length) {
         console.log('Displaying restaurants from database', restaurants);
         if (callback) callback(null, restaurants);
@@ -79,7 +78,6 @@ export default class DBHelper {
         console.log('Displaying restaurants from server');
         DBHelper.populateRestaurants(callback);
       }
-    });
   }
 
   /**
