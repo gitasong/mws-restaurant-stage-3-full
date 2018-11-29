@@ -107,20 +107,17 @@ export default class DBHelper {
   /**
    * Fetch restaurants from server
    */
-  static serveRestaurants(callback) {
-    fetch(DBHelper.RESTAURANTS_URL)
-    .then(response => {
+  static async serveRestaurants() {
+    try {
+      const response = await fetch(DBHelper.RESTAURANTS_URL);
       if (!response.ok) throw new Error(`Restaurants request failed. Returned status of ${error}.`);
-      return response.json()
-      .then(data => {
-        console.log('Data from serveRestaurants(): ', data);
-        const restaurants = data;
-        console.log('Restaurants from server: ', restaurants);
-        callback(null, restaurants);
-      }).catch(error => {
-        callback(error, null);
-      });
-    })
+      const restaurants = await response.json();
+      console.log('Restaurants from server: ', restaurants);
+      return restaurants;
+    }
+    catch(error) {
+      console.log(`Error serving restaurants from database: ${error}`);
+    }
   }
 
   /**
