@@ -142,31 +142,27 @@ export default class DBHelper {
   /**
    * Populate database with restaurants data from server
    */
-  static async populateRestaurants(callback) {
-    console.log('Opening database within populateRestaurants()');
-    const db = await DBHelper.openDatabase();
+  static async populateRestaurants() {
+    try {
+      console.log('Opening database within populateRestaurants()');
+      const db = await DBHelper.openDatabase();
 
-    DBHelper.serveRestaurants((error, restaurants) => {
+      const restaurants = await DBHelper.serveRestaurants();
       const tx = db.transaction('restaurants', 'readwrite');
       const restaurantStore = tx.objectStore('restaurants');
 
-      return Promise.all(
-        restaurants.map(restaurant => {
-          console.log('Adding restaurant: ', restaurant);
-          return restaurantStore.put(restaurant);
-        }
-      )).then(result => {
-        console.log('Result from populateRestaurants: ', result);
-        callback(null, restaurants);
-      })
-      .then(() => {
-        console.log('All restaurants added to database successfully!');
-      })
-      .catch(error => {
-        tx.abort();
-        console.log(error);
+      restaurants.map(async restaurant => {
+        console.log('Adding restaurant: ', restaurant);
+        let putRestaurant = await restaurantStore.put(restaurant);
+        console.log('Put result from populateRestaurants: ', putRestaurant);
+        return putRestaurant;
       });
-    });
+      console.log('All restaurants added to database successfully!');
+    }
+    catch(error) {
+      tx.abort();
+      console.log(`Error populating database: ${error}`);
+    }
   }
 
   /**
