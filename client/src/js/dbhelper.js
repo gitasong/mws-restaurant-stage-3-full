@@ -552,19 +552,19 @@ export default class DBHelper {
   /**
    * Fetch all cuisines with proper error handling.
    */
-  static fetchCuisines(callback) {
+  static async fetchCuisines() {
     // Fetch all restaurants
-    DBHelper.routeRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Get all cuisines from all restaurants
-        const cuisines = restaurants.map((v, i) => restaurants[i].cuisine_type)
-        // Remove duplicates from cuisines
-        const uniqueCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i)
-        callback(null, uniqueCuisines);
-      }
-    });
+    try {
+      let restaurants = await DBHelper.routeRestaurants();
+      // Get all cuisines from all restaurants
+      const cuisines = restaurants.map((v, i) => restaurants[i].cuisine_type);
+      // Remove duplicates from cuisines
+      const uniqueCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i);
+      return uniqueCuisines;
+    }
+    catch(error) {
+      console.log(`Failed to fetch cusines with error ${error}`);
+    }
   }
 
   /**
