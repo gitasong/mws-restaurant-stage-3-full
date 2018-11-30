@@ -61,15 +61,15 @@ const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
 /**
  * Fetch all cuisines and set their HTML.
  */
-const fetchCuisines = () => {
-  DBHelper.fetchCuisines((error, cuisines) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.cuisines = cuisines;
-      fillCuisinesHTML();
-    }
-  });
+const fetchCuisines = async () => {
+  try {
+    const cuisines = await DBHelper.fetchCuisines();
+    self.cuisines = cuisines;
+    fillCuisinesHTML();
+  }
+  catch(error) {
+    console.log(`Failed to fetch cuisines in main.js fetchCuisines() with error ${error}`);
+  }
 }
 
 /**
