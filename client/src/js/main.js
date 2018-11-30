@@ -16,12 +16,14 @@ document.addEventListener('DOMContentLoaded', event => {
   // Initialize map
   self.initMap(); // added
   // Fetch restaurants from server and populate database
-  fetchNeighborhoods();
-  fetchCuisines();
+  const restaurants = DBHelper.routeRestaurants();
+  const neighborhoods = fetchNeighborhoods();
+  const cuisines = fetchCuisines();
   // Post any temporary reviews to server, if online
   DBHelper.postTempReviews();
   // Push any offline favorites to server, if online
   DBHelper.pushFavorites();
+  return restaurants, neighborhoods, cuisines;
 });
 
 /**
