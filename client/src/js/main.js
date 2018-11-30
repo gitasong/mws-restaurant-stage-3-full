@@ -16,13 +16,6 @@ document.addEventListener('DOMContentLoaded', event => {
   // Initialize map
   self.initMap(); // added
   // Fetch restaurants from server and populate database
-  DBHelper.routeRestaurants((error, restaurants) => {
-    if (error) {
-      console.log("Error getting restaurants from routeRestaurants(): ", error);
-    } else {
-      console.log("Reviews result from routeRestaurants(): ", restaurants);
-    }
-  });
   fetchNeighborhoods();
   fetchCuisines();
   // Post any temporary reviews to server, if online
