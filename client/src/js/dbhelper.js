@@ -483,17 +483,16 @@ export default class DBHelper {
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
-  static fetchRestaurantByCuisine(cuisine, callback) {
+  static async fetchRestaurantByCuisine(cuisine) {
     // Fetch all restaurants  with proper error handling
-    DBHelper.routeRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter restaurants to have only given cuisine type
-        const results = restaurants.filter(r => r.cuisine_type == cuisine);
-        callback(null, results);
-      }
-    });
+    try {
+      const restaurants = await DBHelper.routeRestaurants()
+      const results = restaurants.filter(r => r.cuisine_type == cuisine);
+      return results;
+    }
+    catch(error) {
+      console.log(`Failed to fetch restaurants by cuisine type ${cuisine} with error ${error}`);
+    }
   }
 
   /**
