@@ -498,17 +498,16 @@ export default class DBHelper {
   /**
    * Fetch restaurants by a neighborhood with proper error handling.
    */
-  static fetchRestaurantByNeighborhood(neighborhood, callback) {
-    // Fetch all restaurants
-    DBHelper.routeRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter restaurants to have only given neighborhood
-        const results = restaurants.filter(r => r.neighborhood == neighborhood);
-        callback(null, results);
-      }
-    });
+  static async fetchRestaurantByNeighborhood(neighborhood) {
+    try {
+      const restaurants = await DBHelper.routeRestaurants();
+      // Filter restaurants to have only given neighborhood
+      const results = restaurants.filter(r => r.neighborhood == neighborhood);
+      return results;
+    }
+    catch(error) {
+      console.log(`Failed to fetch restaurants by neighborhood ${neighborhood} with error ${error}`);
+    }
   }
 
   /**
