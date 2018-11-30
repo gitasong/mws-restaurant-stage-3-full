@@ -463,20 +463,21 @@ export default class DBHelper {
   /**
    *  Fetches a restaurant by its ID.
    */
-  static fetchRestaurantById(id, callback) {
+  static async fetchRestaurantById(id) {
     // fetch all restaurants with proper error handling.
-    DBHelper.routeRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        const restaurant = restaurants.find(r => r.id == id);
-        if (restaurant) { // Got the restaurant
-          callback(null, restaurant);
-        } else { // Restaurant does not exist in the database
-          callback('Restaurant does not exist', null);
-        }
+    try {
+      const restaurants = await DBHelper.routeRestaurants();
+
+      const restaurant = restaurants.find(r => r.id == id);
+      if (restaurant) { // Got the restaurant
+        return restaurant;
+      } else { // Restaurant does not exist in the database
+        throw new Error('Restaurant does not exist');
       }
-    });
+    }
+    catch(error) {
+      console.log(`Failed to fetch restaurant ${id} by ID with error ${error}`);
+    }
   }
 
   /**
