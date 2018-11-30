@@ -110,7 +110,7 @@ self.initMap = () => {  // initMap() and its methods and properties need to be c
 /**
  * Update page and map for current restaurants.
  */
-self.updateRestaurants = () => {
+self.updateRestaurants = async () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
 
@@ -120,14 +120,14 @@ self.updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      resetRestaurants(restaurants);
-      fillRestaurantsHTML();
-    }
-  })
+  try {
+    const restaurants = await DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood);
+    resetRestaurants(restaurants);
+    fillRestaurantsHTML();
+  }
+  catch(error) {
+    console.log(`Failed to fetch restaurants by cuisine and neighborhood in main.js with error ${error}`);
+  }
 }
 
 /**
