@@ -68,11 +68,10 @@ export default class DBHelper {
   /**
    * Fetch restaurants from database if present; from server otherwise
    */
-  static async routeRestaurants(callback) {
+  static async routeRestaurants() {
     const restaurants = await DBHelper.getRestaurants();
       if (restaurants.length) {
         console.log('Displaying restaurants from database', restaurants);
-        if (callback) callback(null, restaurants);
         return restaurants;
       } else {
         console.log('Displaying restaurants from server');
