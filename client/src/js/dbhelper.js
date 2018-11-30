@@ -203,13 +203,11 @@ export default class DBHelper {
     try {
       const db =  await DBHelper.openDatabase();
 
-      // return db.then(db => {
       const tx = db.transaction('restaurants', 'readonly');
       const restaurantStore = tx.objectStore('restaurants');
       const restaurants = await restaurantStore.getAll();
       console.log('Got restaurants from database: ', restaurants);
       return restaurants;
-      // });
     }
     catch(error) {
       console.log('Error fetching restaurants from database', error);
