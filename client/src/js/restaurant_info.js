@@ -49,24 +49,24 @@ self.initMap = () => {  // initMap() and its methods and properties need to be c
 /**
  * Get current restaurant from page URL.
  */
-const fetchRestaurantFromURL = callback => {
+const fetchRestaurantFromURL = async () => {
   if (self.restaurant) { // restaurant already fetched!
-    callback(null, self.restaurant)
-    return;
+    return self.restaurant;
   }
   const id = getParameterByName('id');
   if (!id) { // no id found in URL
-    const error = 'No restaurant id in URL';
-    callback(error, null);
+    throw new Error('No restaurant id in URL');
   } else {
-    DBHelper.fetchRestaurantById(id, (error, restaurant) => {
+    try {
+      // fetch restaurant data by ID
+      const restaurant = await DBHelper.fetchRestaurantById(id);
+      console.log(`Restaurant ID ${id} from fetchRestaurantById: ${restaurant}`);
       self.restaurant = restaurant;
       if (!restaurant) {
-        console.error(error);
+        throw new Error('Failed to fetch restaurant from URL');
         return;
       }
       fillRestaurantHTML();
-      callback(null, restaurant);
 
       // load and subset reviews into IDB
       let params = (new URL(window.location)).searchParams;
@@ -101,8 +101,14 @@ const fetchRestaurantFromURL = callback => {
           return results;
         }
       }, restaurantID);
-    });
-  }
+      return restaurant;
+    }
+    catch(err) {
+      console.log(`Failed to fetch restaurant by ID in fetchRestaurantFromURL() with error ${err}`);
+    }
+
+    // TODO: Once reviews functions are converted to async/await, move other two DBHelper functions outside of the try block and put subsequent try/catch blocks for the other two DBHelper functions here.
+  };
 }
 
 /**
